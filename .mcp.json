@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "weather": {
+      "type": "stdio",
+      "command": ".venv\\Scripts\\python.exe",
+      "args": ["mcp_servers\\weather_mcp.py"]
+    },
+    "strava": {
+      "type": "stdio",
+      "command": ".venv\\Scripts\\python.exe",
+      "args": ["mcp_servers\\strava_mcp.py"]
+    }
+  }
+}

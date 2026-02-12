@@ -1,0 +1,86 @@
+{
+  "program_name": "Leg Drive",
+  "total_weeks": 8,
+  "week_number": 2,
+  "created_date": "2026-02-10",
+  "training_days_planned": 4,
+  "schedule": [
+    {
+      "day": "Tuesday",
+      "date": "2026-02-10",
+      "type": "T",
+      "intensity": "normal",
+      "focus": "Snatch Pull + Snatch, Snatch DL",
+      "key_exercises": [
+        "Snatch pull + snatch 6x1+1",
+        "Snatch Deadlift 6x3",
+        "Single Leg Squat",
+        "Lu Raises",
+        "Ab Wheel"
+      ],
+      "carry_over": [],
+      "status": "completed"
+    },
+    {
+      "day": "Wednesday",
+      "date": "2026-02-11",
+      "type": "S",
+      "intensity": "normal",
+      "focus": "Goblet Squat, Front Squat, Rack Drives",
+      "key_exercises": [
+        "Dumbbell Goblet Squat 3x10",
+        "Front Squat 5x5",
+        "Rack drives 4x3",
+        "Assisted BTN pullups 3x10",
+        "Lu Raises 3x12"
+      ],
+      "carry_over": [
+        "DB Row 3x15 (missed last week)"
+      ],
+      "status": "skipped",
+      "notes": "Pulled forward from Thursday. Skipped — had class."
+    },
+    {
+      "day": "Thursday",
+      "date": "2026-02-12",
+      "type": "T2",
+      "intensity": "normal",
+      "focus": "Hang Clean + Jerks, Jerk Recovery",
+      "key_exercises": [
+        "Hang power clean + 2 jerks 6x(1+1+1)",
+        "Jerk Recovery or Bottoms up Squat 6x(1+1)",
+        "Cossack squats 3x10"
+      ],
+      "carry_over": [
+        "Front Squat 3x5 (from skipped Wed S session)"
+      ],
+      "status": "planned",
+      "notes": "Wed program day — hybrid clean/jerk technique. Warm up with push press. Front Squat carry-over if time allows."
+    },
+    {
+      "day": "Friday",
+      "date": "2026-02-13",
+      "type": "H",
+      "intensity": "normal",
+      "focus": "Heavy singles — Snatch + Clean & Jerk",
+      "key_exercises": [
+        "Snatch 3 heavy singles",
+        "Clean and Jerk 3 heavy reps",
+        "Side bends 3xAMRAP"
+      ],
+      "carry_over": [],
+      "status": "planned"
+    }
+  ],
+  "cardio_suggestions": [
+    {
+      "day": "Saturday or Sunday",
+      "date": "2026-02-14 or 2026-02-15",
+      "activity": "Easy ride or run",
+      "duration": "30-60 min",
+      "weather": "Sat: 46°F/38% rain; Sun: 45°F/18% rain, calm"
+    }
+  ],
+  "protection_rule": "If hard run/ski on Sat, check legs at next check-in — switch to mini-H if soreness jumps. Back-to-back lifting Wed-Thu-Fri: monitor soreness at each check-in.",
+  "notes": "Even-week pattern. Volume: 6 sets on main lifts. Bumped to 4 sessions — added Wed program day (Hang Clean + Jerks) on Thu. S pulled forward to Wed for better spacing. Comp March 28-29 — no taper adjustments yet."
+}

@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(du:*)",
+      "Bash(python -c:*)",
+      "Bash(.venv/Scripts/python.exe:*)",
+      "WebFetch(domain:open-meteo.com)",
+      "WebFetch(domain:developers.strava.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:gofastmcp.com)",
+      "Bash(if not exist data mkdir data)",
+      "Bash(if not exist mcp_servers mkdir mcp_servers)",
+      "Bash(if not exist scripts mkdir scripts)",
+      "Bash(if not exist \".claude\\\\skills\\\\checkin\" mkdir \".claude\\\\skills\\\\checkin\")",
+      "Bash(if not exist \".claude\\\\skills\\\\log-session\" mkdir \".claude\\\\skills\\\\log-session\")",
+      "Bash(if not exist \".claude\\\\skills\\\\weekly-plan\" mkdir \".claude\\\\skills\\\\weekly-plan\")",
+      "Bash(python scripts/parse_excel.py:*)",
+      "Bash(.venv/Scripts/pip.exe install:*)",
+      "mcp__weather__get_forecast",
+      "mcp__strava__get_activities",
+      "Bash(cmd /c \"cd /d c:\\\\Users\\\\sandr\\\\OneDrive\\\\11_MSIS\\\\549B - AI Machine Learning\\\\Training_App && .venv\\\\Scripts\\\\python.exe scripts\\\\parse_excel.py \"\"Leg Drive.xlsx\"\" 2026-02-02\")",
+      "Bash(.venvScriptspython.exe scriptsparse_excel.py \"references\\\\Leg Drive.xlsx\" 2026-02-02)",
+      "Bash(.venv\\\\Scripts\\\\python.exe:*)",
+      "Bash(findstr:*)",
+      "Bash(wc:*)"
+    ]
+  }
+}

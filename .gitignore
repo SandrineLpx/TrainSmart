@@ -1,0 +1,20 @@
+# Credentials (never share)
+data/strava_config.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Training/runtime logs
+data/training_log.json
+data/training_log.ndjson
+*.log
+logs/

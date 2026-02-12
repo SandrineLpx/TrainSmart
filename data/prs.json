@@ -1,0 +1,15 @@
+{
+  "records": [
+    {"exercise": "Snatch", "weight_kg": 57, "date": null, "notes": "seeded"},
+    {"exercise": "Power Snatch", "weight_kg": 53, "date": null, "notes": "seeded"},
+    {"exercise": "Clean", "weight_kg": 73, "date": null, "notes": "seeded"},
+    {"exercise": "Power Clean", "weight_kg": 73, "date": null, "notes": "seeded"},
+    {"exercise": "Jerk", "weight_kg": 73, "date": null, "notes": "seeded"},
+    {"exercise": "Clean & Jerk", "weight_kg": 73, "date": null, "notes": "seeded"},
+    {"exercise": "Back Squat", "weight_kg": 84, "date": null, "notes": "seeded"},
+    {"exercise": "Front Squat", "weight_kg": 75, "date": null, "notes": "seeded"},
+    {"exercise": "Deadlift", "weight_kg": 100, "date": null, "notes": "seeded"},
+    {"exercise": "Snatch Balance", "weight_kg": 55, "date": null, "notes": "seeded"},
+    {"exercise": "Snatch Deadlift", "weight_kg": 60, "date": null, "notes": "seeded"}
+  ]
+}

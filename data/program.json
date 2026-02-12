@@ -1,0 +1,1101 @@
+{
+  "program_name": "Leg Drive",
+  "program_start_date": "2026-02-02",
+  "total_weeks": 8,
+  "weeks": [
+    {
+      "week_number": 1,
+      "pattern": "odd",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "Clean & Push Press (Until you Can't)",
+            "sets": null,
+            "reps": null,
+            "notes": "This will turn into a power jerk"
+          },
+          {
+            "exercise": "Clean & Jerk + Jerk",
+            "sets": 6,
+            "reps": "1 + 2",
+            "notes": "Power + Squat if squat jerker, else 2 splits"
+          },
+          {
+            "exercise": "Romanian Deadlift",
+            "sets": 3,
+            "reps": 6,
+            "notes": null
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch Deadlift + Slow Eccentric + Snatch (Yoyo Snatch)",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "No straps"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "BTN Power Jerks",
+            "sets": 6,
+            "reps": 2,
+            "notes": "must have complete leg drive. warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Hang Snatch from Power Position + Snatch Balance",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "no straps"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 5,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack Hold",
+            "sets": 4,
+            "reps": "10 seconds",
+            "notes": "Go heavy on these"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Power Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Power Clean & Push Press",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 2,
+      "pattern": "even",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "BTN thrusters",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Jerk grip. Controlled eccentric (no dive bombing)"
+          },
+          {
+            "exercise": "Pause Back Squats",
+            "sets": 6,
+            "reps": 2,
+            "notes": "3 seconds down. 2 second pause. Fast up"
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch pull + snatch",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "No straps. High pull at light weight, speed pull at working weight"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "Hang power clean + 2 jerks",
+            "sets": 6,
+            "reps": "1+1+1",
+            "notes": "warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "try to coerce immobile lifters to try the bottoms up squat"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Dumbbell Goblet Squat",
+            "sets": 3,
+            "reps": 10,
+            "notes": "as heavy as can be held in the hands"
+          },
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 5,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack drives",
+            "sets": 4,
+            "reps": 3,
+            "notes": "As heavy as possible"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Clean and jerk",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 3,
+      "pattern": "odd",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "Clean & Push Press (Until you Can't)",
+            "sets": null,
+            "reps": "1 + 2",
+            "notes": "This will turn into a power jerk"
+          },
+          {
+            "exercise": "Clean & Jerk + Jerk",
+            "sets": 6,
+            "reps": "1 + 2",
+            "notes": "Power + Squat if squat jerker, else 2 splits"
+          },
+          {
+            "exercise": "Romanian Deadlift",
+            "sets": 3,
+            "reps": 6,
+            "notes": null
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch Deadlift + Slow Eccentric + Snatch (Yoyo Snatch)",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "No straps"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": null,
+            "reps": null,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "BTN Power Jerks",
+            "sets": 6,
+            "reps": 2,
+            "notes": "must have complete leg drive. warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Hang Snatch from Power Position + Snatch Balance",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "no straps"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 5,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack Hold",
+            "sets": 4,
+            "reps": "10 seconds",
+            "notes": "Go heavy on these"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Power Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Power Clean & Push Press",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 4,
+      "pattern": "even",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "BTN thrusters",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Jerk grip. Controlled eccentric (no dive bombing)"
+          },
+          {
+            "exercise": "Pause Back Squats",
+            "sets": 6,
+            "reps": 2,
+            "notes": "3 seconds down. 2 second pause. Fast up"
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch pull + snatch",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "No straps. High pull at light weight, speed pull at working weight"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 6,
+            "reps": 3,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": 3,
+            "reps": 8,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          },
+          {
+            "exercise": "Ab Wheel",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "Hang power clean + 2 jerks",
+            "sets": 6,
+            "reps": "1+1+1",
+            "notes": "warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 6,
+            "reps": "1+1",
+            "notes": "try to coerce immobile lifters to try the bottoms up squat"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Dumbbell Goblet Squat",
+            "sets": 3,
+            "reps": 10,
+            "notes": "as heavy as can be held in the hands"
+          },
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 5,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack drives",
+            "sets": 4,
+            "reps": 3,
+            "notes": "As heavy as possible"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Clean and jerk",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 5,
+      "pattern": "odd",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "Clean & Push Press (Until you Can't)",
+            "sets": null,
+            "reps": "1 + 2",
+            "notes": "This will turn into a power jerk"
+          },
+          {
+            "exercise": "Clean & Jerk + Jerk",
+            "sets": 4,
+            "reps": "1 + 2",
+            "notes": "Power + Squat if squat jerker, else 2 splits"
+          },
+          {
+            "exercise": "Romanian Deadlift",
+            "sets": 3,
+            "reps": 5,
+            "notes": null
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          },
+          {
+            "exercise": "Back Extension",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch Deadlift + Slow Eccentric + Snatch (Yoyo Snatch)",
+            "sets": 4,
+            "reps": "1+1",
+            "notes": "No straps"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 4,
+            "reps": 2,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 4,
+            "reps": 2,
+            "notes": null
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": 3,
+            "reps": 8,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "BTN Power Jerks",
+            "sets": 4,
+            "reps": 2,
+            "notes": "must have complete leg drive. warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Hang Snatch from Power Position + Snatch Balance",
+            "sets": 4,
+            "reps": "1+1",
+            "notes": "no straps"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 3,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack Hold",
+            "sets": 4,
+            "reps": "10 seconds",
+            "notes": "Go heavy on these"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Power Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Power Clean & Push Press",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 6,
+      "pattern": "even",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "BTN thrusters",
+            "sets": 4,
+            "reps": 2,
+            "notes": "Jerk grip. Controlled eccentric (no dive bombing)"
+          },
+          {
+            "exercise": "Pause Back Squats",
+            "sets": 4,
+            "reps": 2,
+            "notes": "3 seconds down. 2 second pause. Fast up"
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch pull + snatch",
+            "sets": 4,
+            "reps": "1+1",
+            "notes": "No straps. High pull at light weight, speed pull at working weight"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 4,
+            "reps": 2,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": 3,
+            "reps": 8,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          },
+          {
+            "exercise": "Ab Wheel",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "Hang power clean + 2 jerks",
+            "sets": 4,
+            "reps": "1+1+1",
+            "notes": "warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 5,
+            "reps": "1+1",
+            "notes": "try to coerce immobile lifters to try the bottoms up squat"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Dumbbell Goblet Squat",
+            "sets": 3,
+            "reps": 10,
+            "notes": "as heavy as can be held in the hands"
+          },
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 3,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack drives",
+            "sets": 4,
+            "reps": 3,
+            "notes": "As heavy as possible"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Clean and jerk",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 7,
+      "pattern": "odd",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "Clean & Push Press (Until you Can't)",
+            "sets": null,
+            "reps": "1 + 2",
+            "notes": "This will turn into a power jerk"
+          },
+          {
+            "exercise": "Clean & Jerk + Jerk",
+            "sets": 3,
+            "reps": "1 + 2",
+            "notes": "Power + Squat if squat jerker, else 2 splits"
+          },
+          {
+            "exercise": "Romanian Deadlift",
+            "sets": 3,
+            "reps": 5,
+            "notes": null
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          },
+          {
+            "exercise": "Back Extension",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch Deadlift + Slow Eccentric + Snatch (Yoyo Snatch)",
+            "sets": 3,
+            "reps": "1+1",
+            "notes": "No straps"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 3,
+            "reps": 2,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 4,
+            "reps": 2,
+            "notes": null
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": 3,
+            "reps": 8,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "BTN Power Jerks",
+            "sets": 3,
+            "reps": 2,
+            "notes": "must have complete leg drive. warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Hang Snatch from Power Position + Snatch Balance",
+            "sets": 3,
+            "reps": "1+1",
+            "notes": "no straps"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Front Squat",
+            "sets": 4,
+            "reps": 3,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack Hold",
+            "sets": 4,
+            "reps": "10 seconds",
+            "notes": "Go heavy on these"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Power Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Power Clean & Push Press",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    },
+    {
+      "week_number": 8,
+      "pattern": "even",
+      "days": {
+        "Monday": [
+          {
+            "exercise": "BTN thrusters",
+            "sets": 4,
+            "reps": 2,
+            "notes": "Jerk grip. Controlled eccentric (no dive bombing)"
+          },
+          {
+            "exercise": "Pause Back Squats",
+            "sets": 4,
+            "reps": 2,
+            "notes": "3 seconds down. 2 second pause. Fast up"
+          },
+          {
+            "exercise": "Dips or Weighted Push-Ups",
+            "sets": 3,
+            "reps": "Failure",
+            "notes": null
+          },
+          {
+            "exercise": "DB Row",
+            "sets": 3,
+            "reps": 15,
+            "notes": null
+          }
+        ],
+        "Tuesday": [
+          {
+            "exercise": "Snatch pull + snatch",
+            "sets": 4,
+            "reps": "1+1",
+            "notes": "No straps. High pull at light weight, speed pull at working weight"
+          },
+          {
+            "exercise": "Snatch Deadlift",
+            "sets": 4,
+            "reps": 2,
+            "notes": "Slow eccentric"
+          },
+          {
+            "exercise": "Single Leg Squat",
+            "sets": 3,
+            "reps": 8,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          },
+          {
+            "exercise": "Ab Wheel",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Wednesday": [
+          {
+            "exercise": "Hang power clean + 2 jerks",
+            "sets": 4,
+            "reps": "1+1+1",
+            "notes": "warming up with push press is a good choice"
+          },
+          {
+            "exercise": "Jerk Recovery (For Jerk) or Bottoms up Squat (Squat Jerk)",
+            "sets": 5,
+            "reps": "1+1",
+            "notes": "try to coerce immobile lifters to try the bottoms up squat"
+          },
+          {
+            "exercise": "Cossack squats",
+            "sets": 3,
+            "reps": 10,
+            "notes": "unweighted/goblet/barbell depending on strength"
+          }
+        ],
+        "Thursday": [
+          {
+            "exercise": "Dumbbell Goblet Squat",
+            "sets": 3,
+            "reps": 10,
+            "notes": "as heavy as can be held in the hands"
+          },
+          {
+            "exercise": "Front Squat",
+            "sets": 5,
+            "reps": 3,
+            "notes": "3 seconds down, fast up"
+          },
+          {
+            "exercise": "Rack drives",
+            "sets": 4,
+            "reps": 3,
+            "notes": "As heavy as possible"
+          },
+          {
+            "exercise": "Assisted BTN pullups/lat pulldowns",
+            "sets": 3,
+            "reps": 10,
+            "notes": null
+          },
+          {
+            "exercise": "Lu Raises",
+            "sets": 3,
+            "reps": 12,
+            "notes": null
+          }
+        ],
+        "Friday": [
+          {
+            "exercise": "Snatch",
+            "sets": null,
+            "reps": 1,
+            "notes": "Do three heavy singles"
+          },
+          {
+            "exercise": "Clean and jerk",
+            "sets": null,
+            "reps": "1+1",
+            "notes": "Three heavy reps"
+          },
+          {
+            "exercise": "Side bends",
+            "sets": 3,
+            "reps": "AMRAP",
+            "notes": null
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+---
+name: log-session
+description: Log a completed training session. Records what you did, compares to the program prescription, and updates your training log. Use after training.
+---
+
+# Session Logger
+
+Record a completed session to `data/training_log.ndjson`. Compare against prescription. Check for new PRs.
+
+## Workflow
+
+### Step 1: Ask the athlete (all at once)
+
+1. **Session type:** T / S / H / mini-T / mini-S / mini-H / cardio / recovery (+ intensity)
+2. **Exercises performed:** what you did, or "as prescribed". Cardio: activity + duration + intensity.
+3. **RPE (1-10)** | 4. **Sleep:** good/ok/bad | 5. **Leg soreness (0-10)** | 6. **Notes (optional)**
+
+### Step 2: Load program + compare
+
+Read `data/program.json`. Calculate current week per CLAUDE.md formula. Match performed exercises against prescription. "as prescribed" → all completed. Unmatched extras → bonus entries. Cardio → no comparison.
+
+### Step 3: Build + save
+
+Build entry as a single-line JSON object per schema in `references/skill_schemas.md`. Append it to `data/training_log.ndjson` using Bash: `echo '<json>' >> data/training_log.ndjson`. **Append only — never read+rewrite the file.**
+
+### Step 4: Check PRs
+
+Read `data/prs.json`. Compare logged weights against PR-tracked exercises (CLAUDE.md "Personal Records"). If exceeded → update `prs.json`.
+
+### Step 5: Output
+
+Format per template in `references/skill_schemas.md`. Include new PRs if any.
+
+## Constraints
+
+- Append only — never read+rewrite the log file
+- If sets not specified, use prescribed count
+- Each entry must be valid JSON on a single line (NDJSON format)
