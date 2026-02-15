@@ -79,6 +79,37 @@ The athlete tracks all training on Strava. When reading Strava data, classify ac
 - **Yoga** → recovery/mobility, positive readiness signal
 - **Walk, Hike** → ignore (no impact)
 
+## Weight Guidance
+
+When `/weekly-plan` or `/checkin` outputs exercises, read `data/prs.json` and compute target weights for PR-tracked exercises. Match the exercise name in the program to the closest PR entry.
+
+**Rep-based percentage ranges** (of 1RM PR):
+
+| Reps | % of PR | Use case |
+|------|---------|----------|
+| 1 ("heavy singles") | 85-95% | H-day competition lifts |
+| 1+1, 1+2 (complexes) | 75-85% | Technique complexes, C&J+Jerk |
+| 2 | 80-88% | Pause squats, BTN thrusters |
+| 3 | 75-85% | Front squat triples, rack drives |
+| 5 | 70-80% | Front squat 5x5, strength work |
+| 6+ | 60-70% | RDLs, goblet squats, accessories |
+
+**Note-based overrides** (program notes take precedence):
+- "heavy singles" / "as heavy as possible" → 90-95%
+- "working weight" / "speed pull" → 70-80%
+- "controlled eccentric" / "slow eccentric" → 70-80% (tempo reduces load)
+- "Go heavy on these" → 85-95%
+
+**Output format:** Show weight in kg after the set/rep scheme.
+Example: `Front Squat 5x5 @56-60kg (75-80% of 75kg PR)`
+
+**Rules:**
+- Round to nearest 0.5kg
+- Show as a range (low-high), not a single number — athlete picks based on feel
+- If no matching PR exists for an exercise, omit the weight (don't guess)
+- Accessories without a PR (Lu Raises, Cossack squats, etc.) → no weight shown
+- When readiness is bad (soreness ≥ 6 or energy ≤ 2), use the low end of the range
+
 ## Personal Records
 - File: `data/prs.json`
 - Tracks PRs for: Snatch, Power Snatch, Clean, Power Clean, Jerk, Clean & Jerk, Back Squat, Front Squat, Deadlift, Snatch Balance, Snatch Deadlift

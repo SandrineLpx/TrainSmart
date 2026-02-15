@@ -23,14 +23,17 @@ Quick weekly planning:
 
 1. **Last week's log** → Read `data/training_log.ndjson`. Summarize: sessions done, exercises completed vs. skipped, cardio, RPE avg, soreness trend.
 2. **Program** → Read `data/program.json`. Calculate week number per CLAUDE.md formula. Look up prescribed exercises for all 5 days.
-3. **Weather** (days=7) → Identify outdoor-suitable days per CLAUDE.md "Weather Preferences". Rank by quality.
-4. **Strava** (days_back=7) → Classify per CLAUDE.md "Strava Activity Types". If unavailable, ask about recent cardio.
+3. **PRs** → Read `data/prs.json`. Used in Step 3 to compute target weights per CLAUDE.md "Weight Guidance".
+4. **Weather** (days=7) → Identify outdoor-suitable days per CLAUDE.md "Weather Preferences". Rank by quality.
+5. **Strava** (days_back=7) → Classify per CLAUDE.md "Strava Activity Types". If unavailable, ask about recent cardio.
 
 ### Step 3: Build the schedule
 
 Assign T/S/H/Hybrid per CLAUDE.md "T/S/H Session System". Priority when fewer than 5 days: T → S → H. (0=rest, 1=T, 2=T+S, 3=T+S+H, 4=+Hybrid, 5=full week). If no heavy work in 7+ days, prioritize H over S.
 
 **Intensity:** default normal. Use condensed to pull 1-2 priority exercises from skipped days (cut accessories, max ~6 per session). Use light/mini when fatigued. See condensed example in `references/skill_schemas.md`.
+
+**Weights:** For each exercise with a matching PR in `prs.json`, compute target weight range per CLAUDE.md "Weight Guidance" and show it inline (e.g., `Front Squat 5x5 @56-60kg`).
 
 **Spacing:** ≥1 rest day between sessions when possible. Note carry-overs from last week.
 
