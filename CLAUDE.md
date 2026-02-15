@@ -62,6 +62,9 @@ Each session can be run at different intensities:
 - **Why:** (max 2 lines)
 - **Stop rules:** (exactly 2 rules)
 
+## Date Rule
+- At the start of `/checkin`, read the system date/time and use that date as "today" for plan matching and outputs.
+
 ## Skill Workflow
 1. **Start of week:** Run `/weekly-plan` — reviews last week, asks how many days, saves schedule to `data/current_week_plan.json`
 2. **Before each session:** Run `/checkin` — reads the weekly plan, asks 3 quick questions (sleep, soreness, energy), confirms or adjusts today's session
