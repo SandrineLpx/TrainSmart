@@ -57,7 +57,10 @@ Apply CLAUDE.md "Session Selection Decision Rules". If readiness is BAD (sorenes
 
 **Missed sessions:** If a planned session has no matching log entry and no Strava activity for that date, flag it. Ask if it was skipped or just unlogged. If skipped: mark it `"skipped"` in the plan, carry over 1-2 key exercises (cut accessories), and ask: "Want to keep [N] sessions this week or adjust to [N-1]?"
 **Hard cardio in last 24-36h:** apply protection rule from plan, or switch to T/mini.
-**Not a planned day:** offer next unfinished session from plan.
+**Not a planned day:** Ask the athlete what they want to do:
+1. **Pull forward next session** — carry over the next planned session to today (move it, mark original day as `"moved"`). Apply readiness adjustments as normal.
+2. **Just log training** — skip session planning, keep the weekly plan as-is. Athlete will use `/log-session` afterward to record whatever they do.
+3. **Add a hybrid (T2) session** — add an extra session for the week (e.g., training 4 days instead of 3). Build a T2 per CLAUDE.md rules: jerk technique + snatch balance or clean + jerk work, only when readiness/freshness is good and weekly logs show uncovered priority work. If readiness is bad, suggest option 1 or 2 instead.
 
 ### Step 3b: Time-flex suggestions
 

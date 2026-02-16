@@ -8,5 +8,6 @@
     "max_wind_mph": 25
   },
   "program_start_date": "2026-02-02",
-  "training_days_per_week": 3
+  "training_days_per_week": 3,
+  "competition_date": "2026-03-28"
 }

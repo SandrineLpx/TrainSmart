@@ -1,4 +1,4 @@
-﻿---
+---
 name: log-session
 description: Log a completed training session. Records what you did, compares to the program prescription, and updates your training log. Use after training.
 ---
