@@ -267,6 +267,12 @@
 
 ## Volume Progression
 
+**How to read this table:**
+
+- **Pattern**: `odd` means odd-numbered weeks (1, 3, 5, 7); `even` means even-numbered weeks (2, 4, 6, 8).
+- **Main lift sets**: the typical set count used by the main lifts that week (higher = more volume).
+- In this cycle, the sequence `6 -> 4 -> 3 -> 4` shows high volume early, then reduced volume, then a slight return.
+
 | Week | Pattern | Main lift sets | Days |
 |------|---------|---------------|------|
 | 1 | odd | 6 | Mon, Tue, Wed, Thu, Fri |

@@ -213,6 +213,12 @@ def _write_summary(program):
     lines.append("")
     lines.append("## Volume Progression")
     lines.append("")
+    lines.append("**How to read this table:**")
+    lines.append("")
+    lines.append("- **Pattern**: `odd` means odd-numbered weeks (1, 3, 5, 7); `even` means even-numbered weeks (2, 4, 6, 8).")
+    lines.append("- **Main lift sets**: the typical set count used by the main lifts that week (higher = more volume).")
+    lines.append("- In this cycle, the sequence `6 -> 4 -> 3 -> 4` shows high volume early, then reduced volume, then a slight return.")
+    lines.append("")
     lines.append("| Week | Pattern | Main lift sets | Days |")
     lines.append("|------|---------|---------------|------|")
     for week in program["weeks"]:
