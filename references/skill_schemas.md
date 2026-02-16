@@ -149,7 +149,7 @@ Display temperatures as °C (°F) per CLAUDE.md.
 
 ### /log-session
 ```
-**Logged:** [date] (Week [N], [day]) — Session [type]
+**Today:** [today_date] | **Logged for:** [date] (Week [N], [day]) — Session [type]
 
 **Performed:**
 - [Exercise 1] — [sets] × [reps] ✓
