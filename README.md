@@ -8,12 +8,13 @@ Train Smart wraps an 8-week periodized weightlifting program with three conversa
 
 | Skill | When | What it does |
 |-------|------|--------------|
-| `/weekly-plan` | Start of week | Reviews last week, asks which days you can train, builds a schedule respecting weather and recovery |
+| `/weekly-plan` | Start of week | Reviews last week, cross-checks logs (with Strava when available), asks which days you can train, and builds a schedule respecting weather and recovery |
 | `/checkin` | Before each session | Reads the plan, asks sleep/soreness/energy, confirms or adjusts today's session type and intensity |
 | `/log-session` | After each session | Records what you did, compares to prescription, detects PRs, updates the training log |
 
 The system uses a **T/S/H session model** (Technique / Strength / Heavy) with decision rules that automatically downgrade sessions when fatigue is high, promote heavy work when overdue, and carry over key exercises from skipped days.
 Weekly planning scales from **0-5 training days** (`0=rest`, `1=T`, `2=T+S`, `3=T+S+H`, `4=+T2/hybrid when readiness + logs support it`, `5=full week`), with an override to prioritize heavy work if none has been done in 7+ days.
+Before planning, `/weekly-plan` performs an advisory log-completeness check: it cross-references Strava and training logs when available, or asks you to confirm logged days when Strava is unavailable. This is user-choice only and never hard-blocks planning.
 
 ## Architecture
 
@@ -100,7 +101,7 @@ If `data/current_week_plan.json` is missing, `/checkin` does not auto-run `/week
 
 ## Benchmarks
 
-7 test scenarios with 109 individual tests, all passing. See [tests/benchmark_summary.md](tests/benchmark_summary.md) for full results.
+8 test scenarios with 113 individual tests, all passing. See [tests/benchmark_summary.md](tests/benchmark_summary.md) for full results.
 
 | Category | Scenarios |
 |----------|-----------|

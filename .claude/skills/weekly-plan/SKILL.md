@@ -7,6 +7,18 @@ description: Plan your training week. Sets how many days you'll train, picks the
 
 Review last week, ask schedule preferences, build day-by-day schedule (WL + cardio), save to `data/current_week_plan.json`.
 
+## Inputs
+
+- Athlete inputs: available training days, outdoor cardio preference, fatigue/pain
+- Competition date confirmation/update from `data/preferences.json`
+- Program/training context: `data/program.json`, `data/training_log.ndjson`, `data/prs.json`
+- External context: weather forecast and Strava recent activities (if available)
+
+## Outputs
+
+- Weekly schedule response (day-by-day WL/cardio plan + rationale)
+- Saved/updated `data/current_week_plan.json` including `program_name` and `total_weeks`
+
 ## Workflow
 
 ### Step 0: Check for competition date
@@ -33,7 +45,12 @@ Note: Competition question is handled in Step 0 — do NOT ask again here.
 2. **Program** → Read `data/program.json`. Calculate week number per CLAUDE.md formula. Look up prescribed exercises for all 5 days.
 3. **PRs** → Read `data/prs.json`. Used in Step 3 to compute target weights per CLAUDE.md "Weight Guidance".
 4. **Weather** (days=7) → Identify outdoor-suitable days per CLAUDE.md "Weather Preferences". Rank by quality.
-5. **Strava** (days_back=7) → Classify per CLAUDE.md "Strava Activity Types". If unavailable, ask about recent cardio.
+5. **Strava** (days_back=7) → Classify per CLAUDE.md "Strava Activity Types".
+
+After loading data, do a quick log-completeness check (no hard block):
+- **If Strava is available:** Cross-check last week's Strava activities against `training_log.ndjson`. If likely training sessions are missing from the log, ask: "I found sessions in Strava that are not logged. Do you want to log any now before planning, or continue?"
+- **If Strava is unavailable/not configured:** Ask: "Are last week's training days accurately logged, or do you want to add anything before I plan this week?"
+- In both cases, athlete chooses whether to add info now or continue planning. Never block `/weekly-plan`.
 
 ### Step 3: Build the schedule
 
@@ -59,6 +76,14 @@ Read then overwrite `data/current_week_plan.json`. Include `program_name` and `t
 
 Format per template in `references/skill_schemas.md`. Display temperatures as °C (°F) per CLAUDE.md.
 
+
+## Failure Modes and Fallbacks
+
+- Weather unavailable: plan with log/program data only and skip weather ranking
+- Strava unavailable/not configured: ask about recent cardio or rely on training log
+- Missing/limited recent logs: continue planning from program + athlete inputs
+- Conflicting availability constraints: prioritize requested WL day count and preserve T/S/H ordering
+
 ## Constraints
 
 - Never schedule more WL days than requested
@@ -66,3 +91,4 @@ Format per template in `references/skill_schemas.md`. Display temperatures as °
 - Maximum 1 protection rule
 - Schedule is a suggestion — athlete can move sessions
 - If weather/Strava unavailable, skip or use log data only
+- Log-completeness checks are advisory only (user choice, no hard-block)

@@ -7,6 +7,19 @@ description: Quick pre-workout check-in. Reads your weekly plan, checks how you 
 
 Fast confirmation before training. Reads the weekly plan, asks how you feel, confirms or adjusts.
 
+## Inputs
+
+- Athlete readiness inputs: sleep, leg soreness, energy
+- Optional extra context volunteered by athlete
+- Current weekly plan (`data/current_week_plan.json`)
+- Supporting context: training log, PRs, Strava (if available), weather (if cardio is suggested)
+
+## Outputs
+
+- Today's recommended session type/intensity (confirm or adjust)
+- Exercise-level adjustments with stop rules and time-flex options
+- Plan update in `data/current_week_plan.json` when schedule/session changes
+
 ## Workflow
 
 ### Step 0: Show context
@@ -63,6 +76,14 @@ If today was **not in the schedule** or the recommended session **differs from t
 - If a session was pulled forward from another day, mark that day's status as `"moved"`.
 - This keeps the plan in sync so the next `/checkin` sees accurate state.
 - Skip this step if the session matches the plan exactly.
+
+
+## Failure Modes and Fallbacks
+
+- Missing weekly plan file: offer `(1) /weekly-plan` or `(2) quick fallback for today`
+- Strava unavailable/not configured: continue using training log only
+- Weather unavailable: skip weather-based cardio gating and continue
+- Tool/read errors on optional data: continue with available inputs; do not block the check-in
 
 ## Constraints
 

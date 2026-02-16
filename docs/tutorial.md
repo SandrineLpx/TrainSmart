@@ -101,7 +101,7 @@ Skills say `"Apply per CLAUDE.md 'Session Selection Decision Rules'"` instead of
 
 | Skill | When | Input | Output | Files Read | Files Written |
 |-------|------|-------|--------|-----------|--------------|
-| `/weekly-plan` | Start of week | Training days, fatigue, cardio preference | Day-by-day schedule with exercises, cardio, weather | program.json, training_log.ndjson, Weather MCP, Strava MCP | current_week_plan.json |
+| `/weekly-plan` | Start of week | Training days, fatigue, cardio preference | Day-by-day schedule with exercises, cardio, weather + advisory log-completeness prompt | program.json, training_log.ndjson, Weather MCP, Strava MCP | current_week_plan.json |
 | `/checkin` | Before each session | Sleep, soreness (0-10), energy (1-5) | Session confirmation/adjustment with stop rules | current_week_plan.json, training_log.ndjson, Strava MCP, Weather MCP | current_week_plan.json (if changed) |
 | `/log-session` | After each session | Session type, exercises, RPE | Log confirmation, skipped exercises, PRs | program.json, prs.json | training_log.ndjson (append), prs.json (if PR) |
 
@@ -377,7 +377,7 @@ Phase 3 — 4th session added:
 
 The most impactful change from real usage was discovering that `/checkin` didn't ask about adjusting weekly volume when a session was skipped. In Scenario 6, the AI correctly detected a missed Wednesday session (via Strava + log cross-reference) and carried over Front Squat to Thursday, but it never asked: "Want to keep 4 sessions this week or adjust to 3?"
 
-This was the only hard test failure across all 109 tests. The fix was a one-line addition to `/checkin` Step 3:
+This was the only hard test failure across all 113 tests. The fix was a one-line addition to `/checkin` Step 3:
 
 **Before:**
 > If skipped: mark it `"skipped"` in the plan, carry over 1-2 key exercises (cut accessories).
@@ -391,7 +391,7 @@ This was the only hard test failure across all 109 tests. The fix was a one-line
 
 ### Design
 
-The benchmark evaluates `/checkin` (the most complex skill) across 7 scored scenarios designed to cover the decision space. Scenario 7 was added later and is pending scoring.
+The benchmark evaluates `/checkin` (the most complex skill) across 8 scored scenarios designed to cover the decision space.
 
 | # | Scenario | Type | Tests |
 |---|----------|------|-------|
@@ -402,7 +402,7 @@ The benchmark evaluates `/checkin` (the most complex skill) across 7 scored scen
 | 4 | Ambiguous / vague input | Ambiguous | 16 |
 | 5 | Baseline comparison | Baseline | 11 |
 | 6 | Skipped session detection | Edge case | 14 |
-| 7 | Trained yesterday + plan/log mismatch | Edge case | TBD |
+| 7 | Trained yesterday + plan/log mismatch | Edge case | 4 |
 
 ### Scoring Rubric
 
@@ -417,6 +417,7 @@ Each test is scored on a 0/1/2 scale:
 ### Evaluation Method
 
 Human scoring by the athlete (domain expert). Each test has a specific expected output and pass/fail criterion. Prompts and CLAUDE.md were frozen at Iteration 12 versions throughout testing.
+All scored benchmark runs were executed in Claude Code (Opus). I also tested `/checkin` with Codex after adding `AGENTS.md`; guidance adherence improved, but behavior still did not fully match the expected workflow/format, so those Codex runs were not included in benchmark scoring.
 
 ### Aggregate Results (Scored Scenarios Only)
 
@@ -429,10 +430,10 @@ Human scoring by the athlete (domain expert). Each test has a specific expected 
 | 4 | Ambiguous / vague input | 16 | 32/32 |
 | 5 | Baseline comparison | 11 | 22/22 vs 5.5/22 |
 | 6 | Skipped session detection | 14 | 28/28 |
-| 7 | Trained yesterday + plan/log mismatch | TBD | TBD |
-| **Total (scored)** | | **109** | **218/218** |
+| 7 | Trained yesterday + plan/log mismatch | 4 | 8/8 |
+| **Total (scored)** | | **113** | **226/226** |
 
-All 109 scored tests pass after fixing the one failure in Scenario 6. Scenario 7 scoring is pending.
+All 113 scored tests pass after fixing the one failure in Scenario 6.
 
 ### Concrete Example 1: Ambiguous Input (Scenario 4)
 
@@ -564,7 +565,7 @@ The one hard failure (Scenario 6, test #14) demonstrated that benchmarking works
 
 **Yes.** I've been using it for the last 2 weeks of real training and it has already saved decision time. The check-in is genuinely fast (10 seconds), the exercise carry-over prevents things from falling through cracks, and the Strava integration catches interference I might overlook.
 
-**Caveats:** I would need to address the carry-over accumulation issue before week 4-5 of the program, and the verbosity on rest days needs prompt tuning. The system also assumes a single program — if I run a squat specialization cycle alongside the base program, the merge logic isn't implemented yet (planned as a future iteration).
+**Caveats:** I would need to address the carry-over accumulation issue before week 4-5 of the program, and the verbosity on rest days needs prompt tuning. The system also assumes a single program — if I run a squat specialization cycle alongside the base program, the merge logic isn't implemented yet (planned as a future iteration). Cross-LLM portability is also a current limitation: after adding `AGENTS.md`, Codex behavior improved but still did not fully match the Claude-tuned skill behavior, so multi-LLM reliability still needs dedicated testing.
 
 ---
 
@@ -689,6 +690,7 @@ best days based on weather and schedule, and saves a tentative plan.
 
 ### Step 2: Gather data (in parallel)
 Last week's log, program (calculate week), weather (7 days), Strava (7 days).
+Then run an advisory log-completeness check: Strava-vs-log cross-check when available, or athlete confirmation when Strava is unavailable. Continue planning either way.
 
 ### Step 3: Build the schedule
 Assign T/S/H per CLAUDE.md. Priority: T→S→H. Intensity: default normal.
@@ -735,7 +737,7 @@ Compare against prs.json. Update if exceeded.
 
 ## Appendix B: Benchmark Test Case Table
 
-Full test results across 7 scored scenarios (109 tests). Scenario 7 added later; scoring TBD.
+Full test results across 8 scored scenarios (113 tests).
 
 | Scenario | # | Test | Pass |
 |----------|---|------|:----:|
@@ -788,8 +790,10 @@ Full test results across 7 scored scenarios (109 tests). Scenario 7 added later;
 | | 6-10 | Session + carry-over | Y |
 | | 11-13 | Output format | Y |
 | | 14 | Volume adjustment question | Y |
+| **7. Trained yesterday + plan/log mismatch** | 1-3 | Session selection + stop rules | Y |
+| | 4 | Output format (adjusting template) | Y |
 
-**Total: 109 tests, 218/218 score (100%)**
+**Total: 113 tests, 226/226 score (100%)**
 
 ## Appendix C: CLAUDE.md (Full Contents)
 

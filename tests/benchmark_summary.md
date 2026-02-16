@@ -5,6 +5,7 @@
 - **Evaluation method:** Human scoring (athlete as domain expert) + automated checks (data file validation)
 - **Prompts frozen:** All SKILL.md files at Iteration 12 versions throughout testing
 - **Environment:** Claude Code with Opus model, Windows 11, both MCP servers running
+- **LLM scope note:** All scored benchmark runs were executed with Claude. A Codex check-in trial was run after adding `AGENTS.md`; behavior improved but still did not fully respect expected workflow/format, so Codex runs were excluded from scored results.
 
 ## Scoring Rubric
 
@@ -25,7 +26,8 @@
 | 4 | Ambiguous / vague input | Ambiguous | /checkin | 16 | 16 | 0 | 0 | 32/32 |
 | 5 | Baseline comparison | Baseline | /checkin vs raw Claude | 11 | — | — | — | 22/22 vs 5.5/22 |
 | 6 | Skipped session detection | Edge case | /checkin | 14 | 14 | 0 | 0 | 28/28 |
-| **Total** | | | | **109** | **98** | **0** | **0** | **218/218** |
+| 7 | Trained yesterday + plan/log mismatch | Edge case | /checkin | 4 | 4 | 0 | 0 | 8/8 |
+| **Total** | | | | **113** | **102** | **0** | **0** | **226/226** |
 
 (Scenario 5 scored separately — see baseline comparison detail below.)
 Note: Scenario 6 test #14 initially failed, triggering a fix to `/checkin` Step 3 (volume adjustment question). After the fix, all 14 tests pass.
@@ -34,7 +36,7 @@ Note: Scenario 6 test #14 initially failed, triggering a fix to `/checkin` Step 
 
 | Category | Rubric requirement | Covered by |
 |----------|--------------------|------------|
-| 2+ test cases | Yes (7 scenarios) | All |
+| 2+ test cases | Yes (8 scenarios) | All |
 | Clear metrics | 0/1/2 scoring per test | All |
 | Edge cases | At least 1 | Scenarios 2, 3.1, 3.2 |
 | Ambiguous case | At least 1 | Scenario 4 |
@@ -64,7 +66,7 @@ Raw Claude scored higher than predicted (25% vs 9%) because it could read the Ex
 
 ### No hard failures observed
 
-98 of 98 scored tests pass across 7 scenarios (after fixing the one failure in Scenario 6). The initial failure — missing volume adjustment question on skipped sessions — was the only hard failure found. It triggered a real improvement to `/checkin` Step 3. The remaining test cases were designed after 12 iterations, so they validate current behavior rather than stress-testing unknown inputs.
+102 of 102 scored tests pass across 8 scenarios (after fixing the one failure in Scenario 6). The initial failure — missing volume adjustment question on skipped sessions — was the only hard failure found. It triggered a real improvement to `/checkin` Step 3. The remaining test cases were designed after 12 iterations, so they validate current behavior rather than stress-testing unknown inputs.
 
 ### Soft issues observed during testing
 

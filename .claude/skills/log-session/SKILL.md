@@ -7,6 +7,19 @@ description: Log a completed training session. Records what you did, compares to
 
 Record a completed session to `data/training_log.ndjson`. Compare against prescription. Check for new PRs.
 
+## Inputs
+
+- Log date (`today` or explicit `YYYY-MM-DD`)
+- Session type/intensity and exercises performed (or `as prescribed`)
+- Readiness and context fields: RPE, sleep, soreness, optional notes
+- Program + PR reference files: `data/program.json`, `data/prs.json`
+
+## Outputs
+
+- One appended NDJSON log entry in `data/training_log.ndjson`
+- Updated PR values in `data/prs.json` when a new PR is detected
+- Logging confirmation output (including PR callouts if applicable)
+
 ## Workflow
 
 ### Step 0: Detect date and confirm log date
@@ -38,6 +51,14 @@ Read `data/prs.json`. Compare logged weights against PR-tracked exercises (CLAUD
 ### Step 5: Output
 
 Format per template in `references/skill_schemas.md`. Include new PRs if any.
+
+
+## Failure Modes and Fallbacks
+
+- `/checkin` not run earlier: continue and log normally
+- Unknown/unmatched exercise names: log as performed; mark unmatched as extras
+- Missing sets/reps in user input: use prescribed count when available
+- PR file missing/unreadable: still append session log; skip PR update and note it
 
 ## Constraints
 

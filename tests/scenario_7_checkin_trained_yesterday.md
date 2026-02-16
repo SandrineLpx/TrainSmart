@@ -52,15 +52,15 @@ I trained yesterday. I am going to train today.
 
 | # | What to verify | Expected | Pass? |
 |---|---------------|----------|-------|
-| 1 | High soreness rule applied | Recommends mini-T (not S or H) when soreness is 7/10 | |
-| 2 | Heavy day avoided | Output explicitly avoids heavy/strength work | |
-| 3 | Stop rules included | Exactly two stop rules from CLAUDE.md | |
+| 1 | High soreness rule applied | Recommends mini-T (not S or H) when soreness is 7/10 | Y |
+| 2 | Heavy day avoided | Output explicitly avoids heavy/strength work | Y |
+| 3 | Stop rules included | Exactly two stop rules from CLAUDE.md | Y |
 
 ### Output Format Tests
 
 | # | What to verify | Expected | Pass? |
 |---|---------------|----------|-------|
-| 1 | Output follows `/checkin` adjusting template | Includes Today, Why, Session, Adjustments, time-flex, Stop rules | |
+| 1 | Output follows `/checkin` adjusting template | Includes Today, Why, Session, Adjustments, time-flex, Stop rules | Y |
 
 ## Decision Logic Verified
 - Session Selection Decision Rules: leg soreness 7 ≥ 6 → mini-T only
