@@ -35,7 +35,7 @@ If the athlete volunteers extra info, use it. Don't ask for more.
 1. **Weekly plan** → already loaded in Step 0. Find today's session. If no plan exists → offer: (1) run `/weekly-plan` or (2) quick fallback (read `program.json` + apply decision rules).
 2. **Training log** → Read `data/training_log.ndjson`. Check completed vs. missed sessions this week + recent cardio (48h).
 3. **PRs** → Read `data/prs.json`. Used in Step 4 to show target weights per CLAUDE.md "Weight Guidance".
-4. **Strava** (days_back=2) → Classify per CLAUDE.md "Strava Activity Types". If unavailable, skip silently.
+4. **Strava** (days_back=2) → Classify per CLAUDE.md "Strava Activity Types". If unavailable or returns `"status": "not_configured"`, skip silently and rely on training log for recent activity data.
 5. **Weather** (days=1) → Only if today has a cardio suggestion in the plan.
 
 ### Step 3: Decide

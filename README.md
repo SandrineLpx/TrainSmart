@@ -8,7 +8,7 @@ Train Smart wraps an 8-week periodized weightlifting program with three conversa
 
 | Skill | When | What it does |
 |-------|------|--------------|
-| `/weekly-plan` | Start of week | Reviews last week, asks how many days you can train, builds a schedule respecting weather and recovery |
+| `/weekly-plan` | Start of week | Reviews last week, asks which days you can train, builds a schedule respecting weather and recovery |
 | `/checkin` | Before each session | Reads the plan, asks sleep/soreness/energy, confirms or adjusts today's session type and intensity |
 | `/log-session` | After each session | Records what you did, compares to prescription, detects PRs, updates the training log |
 
@@ -68,6 +68,10 @@ iterations/               # Development iteration logs
 4. **Parse the program (if starting from a new Excel file)**
    ```bash
    python scripts/parse_excel.py "references/Leg Drive.xlsx" 2026-02-02
+   ```
+   Windows shortcut (optional local helper):
+   ```powershell
+   .\scripts\parse_program.ps1 -File "references\Leg Drive.xlsx" -StartDate 2026-02-02
    ```
 
 5. **Start Claude Code** — the `.mcp.json` file auto-registers both MCP servers.
@@ -130,7 +134,7 @@ Training_App/
     scenario_*.md                    # Individual test scenarios
     SCENARIO_TEMPLATE.md             # Template for new scenarios
   iterations/                        # Development log
-  Documentation/                     # Assignment instructions
+  docs/                             # Assignment instructions
 ```
 
 ## License

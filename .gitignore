@@ -17,7 +17,6 @@ __pycache__/
 Thumbs.db
 
 # Training/runtime logs
-data/training_log.json
 data/training_log.ndjson
 *.log
 logs/

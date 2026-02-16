@@ -128,7 +128,7 @@ The program prescribes 5 days (Mon-Fri), but the athlete trains 3. Sessions are 
 | **T** (Technique) | Snatch pulls, snatch work | Tuesday | 1st (always safe) |
 | **S** (Strength) | Squats, jerks, leg drive | Monday + Thursday | 2nd |
 | **H** (Heavy) | Competition lifts, heavy singles | Friday | 3rd |
-| **Hybrid** | Clean/jerk technique (Wed program) | Wednesday | 4th |
+| **T2** (Hybrid) | Clean/jerk technique (Wed program) | Wednesday | 4th |
 
 Each type can run at three intensities:
 - **Light (mini):** 1-2 main lifts only, reduced sets — for fatigue or deload

@@ -9,6 +9,13 @@ Review last week, ask schedule preferences, build day-by-day schedule (WL + card
 
 ## Workflow
 
+### Step 0: Check for competition date
+
+Before asking anything, read `data/preferences.json` and check for a `competition_date` field.
+
+- **If a competition date exists:** Show it to the athlete and ask to confirm it's still correct. Also ask if there are any other competitions or events before that date.
+- **If no competition date exists:** Ask if there's a competition within the next 4 weeks. If yes, save the date to `data/preferences.json` as `competition_date` (ISO format).
+
 ### Step 1: Ask the athlete (all at once)
 
 ```
@@ -16,8 +23,9 @@ Quick weekly planning:
 1. Which days are you training this week? (e.g., "Tue, Thu, Sat" or "none")
 2. Want to plan outdoor cardio? (yes/no — I'll check weather)
 3. How are you feeling? Fatigue: low/medium/high, any pain?
-4. Competition coming up? (date, or "no")
 ```
+
+Note: Competition question is handled in Step 0 — do NOT ask again here.
 
 ### Step 2: Gather data (in parallel)
 

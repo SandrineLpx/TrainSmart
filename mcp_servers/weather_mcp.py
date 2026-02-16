@@ -28,7 +28,7 @@ def _load_preferences():
             "longitude": -122.2060,
             "outdoor_thresholds": {
                 "max_precipitation_pct": 40,
-                "min_temp_f": 40,
+                "min_temp_f": 39,
                 "max_wind_mph": 25,
             },
         }

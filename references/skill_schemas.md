@@ -70,7 +70,7 @@ File: `data/training_log.ndjson` — NDJSON format (one JSON object per line).
 
 3 days (Mon, Wed, Fri) in Week 2 (even):
 - **Mon (S-condensed):** BTN Thrusters 6x3, Pause BS 6x2 + *Snatch Pull 6x1+1 from Tue* + *Front Squat 5x5 from Thu*
-- **Wed (Hybrid-normal):** Hang Clean + Jerks 6x1+1+1, Jerk Recovery 6x1+1, Cossack Squats
+- **Wed (T2-normal):** Hang Clean + Jerks 6x1+1+1, Jerk Recovery 6x1+1, Cossack Squats
 - **Fri (H-normal):** Snatch 3 heavy singles, C&J 3 heavy reps, Side Bends
 
 Mon covers strength + technique + squats, Wed covers jerk work, Fri covers heavy day. Nothing critical missed.

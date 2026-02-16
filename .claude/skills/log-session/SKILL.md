@@ -11,7 +11,7 @@ Record a completed session to `data/training_log.ndjson`. Compare against prescr
 
 ### Step 1: Ask the athlete (all at once)
 
-1. **Session type:** T / S / H / mini-T / mini-S / mini-H / cardio / recovery (+ intensity)
+1. **Session type:** T / S / H / T2 / mini-T / mini-S / mini-H / cardio / recovery (+ intensity)
 2. **Exercises performed:** what you did, or "as prescribed". Cardio: activity + duration + intensity.
 3. **RPE (1-10)** | 4. **Sleep:** good/ok/bad | 5. **Leg soreness (0-10)** | 6. **Notes (optional)**
 

@@ -3,18 +3,14 @@
 ## Athlete Profile
 - Olympic weightlifter, trains ~3 days/week (days vary)
 - Uses a flexible T/S/H session system (Technique/Strength/Heavy — sessions can be moved across days)
-- Supplements with outdoor cardio: bike, run, ski, yoga
-- Location: Kirkland, WA 98034
+- Supplements with outdoor cardio: bike, run, ski.
 - Tracks all activities on Strava (cardio, gym WL sessions, yoga)
 
 ## Current Program
 - File: `data/program.json` (parsed from Leg Drive.xlsx)
-- 8-week periodized program, 5 prescribed days/week (Mon-Fri)
-- Program start date: 2026-02-02
-- To find current week: `week = ((today - 2026-02-02).days // 7) + 1`, clamped to 1-8
-- Odd weeks (1,3,5,7): Clean & Jerk Mon, Yoyo Snatch Tue, BTN Jerks Wed, Front Squat Thu, Power Snatch + Power C&J Fri
-- Even weeks (2,4,6,8): BTN Thrusters Mon, Snatch Pull Tue, Hang Clean Wed, Goblet+FS Thu, Snatch + C&J Fri
-- Volume tapers across weeks (sets: 6→6→4→4→3→3 on main lifts)
+- Program start date and week calculation formula are in `data/preferences.json` (`program_start_date`)
+- To find current week: `week = ((today - program_start_date).days // 7) + 1`, clamped to 1-8
+- Read `data/program.json` for weekly exercises, sets, reps, and notes
 
 ## Training Log
 - File: `data/training_log.ndjson` (NDJSON format — one JSON object per line)
@@ -25,10 +21,12 @@
 ## T/S/H Session System
 
 Session types (used for scheduling and logging):
-- **T (Technique)**: Snatch pulls, snatch technique, pulls — maps to Tuesday program exercises
-- **S (Strength)**: Squats, jerks, leg drive — maps to Monday + Thursday program exercises
-- **H (Heavy)**: Heavy singles, competition lifts — maps to Friday program exercises
-- **Wednesday** is a hybrid (jerk technique + snatch balance or clean + jerk work)
+- **T (Technique)**: Snatch pulls, snatch technique, pulls
+- **S (Strength)**: Squats, jerks, leg drive
+- **H (Heavy)**: Heavy singles, competition lifts
+- **T2 (Hybrid)**: Jerk technique + snatch balance or clean + jerk work. Use when a 4th training day is available
+
+Session-to-program-day mapping is defined per week in `data/program.json` — read it to determine which exercises belong to each session type.
 
 Each session can be run at different intensities:
 - **Light (mini)**: Only the 1-2 main lifts, reduced sets — use when fatigued
@@ -51,8 +49,7 @@ Each session can be run at different intensities:
 - Otherwise use recommended order: **T → S → H**
 
 ## Weather Preferences
-- File: `data/preferences.json`
-- Outdoor training OK when: rain probability < 40%, temp > 4°C (40°F), wind < 25 mph
+- Thresholds (rain, temp, wind) are in `data/preferences.json` under `outdoor_thresholds`
 - Display temperatures as Celsius first with Fahrenheit in parentheses: e.g., "11°C (52°F)"
 - Use the weather MCP tool (`get_forecast`) to check conditions
 
@@ -66,7 +63,7 @@ Each session can be run at different intensities:
 - At the start of `/checkin`, read the system date/time and use that date as "today" for plan matching and outputs.
 
 ## Skill Workflow
-1. **Start of week:** Run `/weekly-plan` — reviews last week, asks how many days, saves schedule to `data/current_week_plan.json`
+1. **Start of week:** Run `/weekly-plan` — reviews last week, asks which days you can train, saves schedule to `data/current_week_plan.json`
 2. **Before each session:** Run `/checkin` — reads the weekly plan, asks 3 quick questions (sleep, soreness, energy), confirms or adjusts today's session
 3. **After each session:** Run `/log-session` — records what was done, compares to prescription, updates the training log
 
@@ -83,7 +80,7 @@ The athlete tracks all training on Strava. When reading Strava data, classify ac
 
 When `/weekly-plan` or `/checkin` outputs exercises, read `data/prs.json` and compute target weights for PR-tracked exercises. Match the exercise name in the program to the closest PR entry.
 
-**Rep-based percentage ranges** (of 1RM PR):
+**Rep-based percentage ranges** (of 1RM PR, based on standard strength training conventions):
 
 | Reps | % of PR | Use case |
 |------|---------|----------|
@@ -111,8 +108,7 @@ Example: `Front Squat 5x5 @56-60kg (75-80% of 75kg PR)`
 - When readiness is bad (soreness ≥ 6 or energy ≤ 2), use the low end of the range
 
 ## Personal Records
-- File: `data/prs.json`
-- Tracks PRs for: Snatch, Power Snatch, Clean, Power Clean, Jerk, Clean & Jerk, Back Squat, Front Squat, Deadlift, Snatch Balance, Snatch Deadlift
+- File: `data/prs.json` — read it for the list of tracked exercises and current PRs
 - When `/log-session` records a weight that exceeds the current PR for a tracked exercise, update `prs.json` with the new weight and date
 - Only compare against PR-tracked exercises (competition lifts, power variants, strength lifts)
 - When a new PR is set, include it in the log confirmation output (e.g., "PR! Snatch 59kg (was 57kg)")
