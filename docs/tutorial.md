@@ -188,7 +188,7 @@ The system was built across 12 iterations over 2 days:
 | Iteration | What Changed | Key Decision |
 |-----------|-------------|--------------|
 | 1 | Initial build: 3 skills, 2 MCP servers, data layer, CLAUDE.md | Split /checkin and /weekly-plan into separate skills (was one monolithic skill) |
-| 2 | A/B/C → T/S/H rename + intensity levels (light/normal/condensed) | Self-documenting labels > abstract letters |
+| 2 | Session label update to T/S/H + intensity levels (light/normal/condensed) | Self-documenting labels > abstract labels |
 | 3 | Strava SSL certificate fix | `certifi` SSL context was applied to token refresh but not activity fetch |
 | 4 | Simplified weekly planning questions (5 → 4) | "Which days?" replaces "how many?" + "which days off?" |
 | 5 | Checkin context line + numbered no-plan fallback | Show program/week/date before asking anything |
@@ -228,11 +228,11 @@ Split into `/weekly-plan` (once per week, ~4 questions, heavy data gathering) an
 
 **Result:** Check-in time dropped from 60+ seconds to ~10 seconds. The weekly plan persists in `current_week_plan.json`, so `/checkin` doesn't need to recalculate.
 
-### Iteration B: A/B/C → T/S/H + Intensity Levels
+### Iteration B: Session Label Update to T/S/H + Intensity Levels
 
 **Before:**
 ```
-Session types: A (Monday exercises), B (Tuesday exercises), C (Friday exercises).
+Session types used abstract labels tied to program days.
 One intensity level: as prescribed.
 ```
 
@@ -243,7 +243,7 @@ Three intensities: light (mini), normal (as prescribed), condensed
 (as prescribed + key exercises from skipped days).
 ```
 
-**Why:** A/B/C was abstract — the athlete had to memorize the mapping. T/S/H is self-documenting. Intensity levels give real flexibility: train 3 days with condensed coverage or 3 days with normal volume. This matches real-world decisions athletes make weekly.
+**Why:** The previous labels were abstract and required memorization. T/S/H is self-documenting. Intensity levels give real flexibility: train 3 days with condensed coverage or 3 days with normal volume. This matches real-world decisions athletes make weekly.
 
 **Result:** Session type labels instantly communicate intent. The condensed option means fewer training days doesn't mean missing critical exercises.
 

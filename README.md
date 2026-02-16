@@ -33,7 +33,7 @@ scripts/
   parse_excel.py          # Converts coach's Excel spreadsheet to program.json
   strava_auth.py          # One-time OAuth2 setup for Strava
 tests/                    # Benchmark scenarios and summary
-iterations/               # Development iteration logs
+iterations/               # Development iteration logs + index
 ```
 
 ## Prerequisites
@@ -136,9 +136,28 @@ Training_App/
     benchmark_summary.md             # Aggregate results
     scenario_*.md                    # Individual test scenarios
     SCENARIO_TEMPLATE.md             # Template for new scenarios
-  iterations/                        # Development log
-  docs/                             # Assignment instructions
+  iterations/                        # Development logs + artifacts
+    README.md                        # Iteration index
+    artifacts/                       # Iteration screenshots/assets
+  docs/                              # Project documentation
+    README.md                        # Docs index
+    tutorial.md                      # Full assignment narrative
+    instructions.md                  # Short handoff/checklist
+  references/                        # Source references/templates
+    skill_schemas.md                 # Shared schemas + output templates
+    programs/                        # Optional add-on program templates
 ```
+
+## Orientation for New Contributors
+
+If you are new to this repo, read in this order:
+
+1. `README.md` (this file) for setup and architecture
+2. `CLAUDE.md` for training rules and decision logic
+3. `docs/README.md` for document navigation
+4. `iterations/README.md` for change history navigation
+
+`data/` should hold active runtime state, while `references/` holds source templates/examples.
 
 ## License
 
