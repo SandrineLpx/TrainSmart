@@ -13,6 +13,7 @@ Train Smart wraps an 8-week periodized weightlifting program with three conversa
 | `/log-session` | After each session | Records what you did, compares to prescription, detects PRs, updates the training log |
 
 The system uses a **T/S/H session model** (Technique / Strength / Heavy) with decision rules that automatically downgrade sessions when fatigue is high, promote heavy work when overdue, and carry over key exercises from skipped days.
+Weekly planning scales from **0-5 training days** (`0=rest`, `1=T`, `2=T+S`, `3=T+S+H`, `4=+T2/hybrid when readiness + logs support it`, `5=full week`), with an override to prioritize heavy work if none has been done in 7+ days.
 
 ## Architecture
 
@@ -87,6 +88,8 @@ Open Claude Code in the project directory and use the skills:
 ```
 
 The system reads `CLAUDE.md` for all domain rules (session selection, stop rules, intensity adjustments) so the AI follows the same logic every time.
+
+If `data/current_week_plan.json` is missing, `/checkin` does not auto-run `/weekly-plan`; it offers two options: run `/weekly-plan` now or use a one-off quick fallback for today.
 
 ## MCP Servers
 

@@ -24,7 +24,7 @@ Session types (used for scheduling and logging):
 - **T (Technique)**: Snatch pulls, snatch technique, pulls
 - **S (Strength)**: Squats, jerks, leg drive
 - **H (Heavy)**: Heavy singles, competition lifts
-- **T2 (Hybrid)**: Jerk technique + snatch balance or clean + jerk work. Use when a 4th training day is available
+- **T2 (Hybrid)**: Jerk technique + snatch balance or clean + jerk work. Use as an optional 4th session when readiness/freshness is good and weekly logs show uncovered priority work
 
 Session-to-program-day mapping is defined per week in `data/program.json` — read it to determine which exercises belong to each session type.
 
@@ -65,6 +65,7 @@ Each session can be run at different intensities:
 ## Skill Workflow
 1. **Start of week:** Run `/weekly-plan` — reviews last week, asks which days you can train, saves schedule to `data/current_week_plan.json`
 2. **Before each session:** Run `/checkin` — reads the weekly plan, asks 3 quick questions (sleep, soreness, energy), confirms or adjusts today's session
+   - If no weekly plan exists (`data/current_week_plan.json` missing), `/checkin` offers: (1) run `/weekly-plan` now, or (2) a quick fallback for today.
 3. **After each session:** Run `/log-session` — records what was done, compares to prescription, updates the training log
 
 ## Strava Activity Types

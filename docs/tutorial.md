@@ -25,12 +25,12 @@ University of Washington, Foster School of Business
 
 ### The Pain Point
 
-I'm an Olympic weightlifter who trains approximately 3 days per week on a coach-prescribed 5-day program ("Leg Drive" — an 8-week periodized cycle). The mismatch between a 5-day program and a 3-day schedule creates a daily decision problem:
+I'm an Olympic weightlifter on a coach-prescribed 5-day program ("Leg Drive" - an 8-week periodized cycle), but in practice I usually don't complete all 5 days. Between school and frequent outdoor activities, I'm mostly following a 3-days-per-week training schedule right now. That mismatch creates a daily decision problem:
 
-- **Which session do I run today?** The program prescribes Mon-Fri, but I train Tue/Thu/Sat or whenever I can fit it in.
+- **Which session do I run today?** The program prescribes Mon-Fri, but I usually train Tue/Thu/Fri (or whatever days fit that week).
 - **What intensity?** If I'm sore from yesterday's ski or last night's sleep was bad, should I go lighter?
 - **What exercises carry over?** If I skip Thursday's squat day, does the Front Squat just disappear, or should it move to Friday?
-- **When is outdoor cardio safe?** A hard run before heavy day wrecks performance, but a bike ride is fine.
+- **When is outdoor cardio safe?** A hard run before heavy day wrecks performance, but a bike ride (road) is fine. MTB might be different. 
 
 Today, I handle this with a spreadsheet and gut feel. It takes 5-10 minutes of mental math before each session, and I often second-guess myself mid-warm-up. Worse, I lose track of skipped exercises — they just fall through the cracks.
 
@@ -128,7 +128,17 @@ The program prescribes 5 days (Mon-Fri), but the athlete trains 3. Sessions are 
 | **T** (Technique) | Snatch pulls, snatch work | Tuesday | 1st (always safe) |
 | **S** (Strength) | Squats, jerks, leg drive | Monday + Thursday | 2nd |
 | **H** (Heavy) | Competition lifts, heavy singles | Friday | 3rd |
-| **T2** (Hybrid) | Clean/jerk technique (Wed program) | Wednesday | 4th |
+| **T2** (Hybrid) | Clean/jerk technique + uncovered priority work | Added as 4th session when freshness/readiness and weekly logs support it | 4th |
+
+Day-count mapping used by `/weekly-plan`:
+- **0 days:** Rest/recovery week (no WL sessions)
+- **1 day:** T
+- **2 days:** T + S
+- **3 days:** T + S + H
+- **4 days:** T + S + H + T2 (if readiness/logs support it)
+- **5 days:** Full program week
+
+Override rule: if no heavy work in 7+ days, prioritize H over S when selecting limited sessions.
 
 Each type can run at three intensities:
 - **Light (mini):** 1-2 main lifts only, reduced sets — for fatigue or deload
