@@ -71,7 +71,7 @@ Each session can be run at different intensities:
 ## Strava Activity Types
 
 The athlete tracks all training on Strava. When reading Strava data, classify activities:
-- **Run, NordicSki, BackcountrySki** → hard cardio, interference signal (avoid heavy S/H next day)
+- **MTB, Run, Ski, BackcountrySki** → hard cardio, interference signal (avoid heavy S/H next day)
 - **Ride** → easy cardio (low interference unless >90 min)
 - **WeightTraining** → gym WL session. Cross-reference with training log — if no matching log entry, remind to `/log-session`
 - **Yoga** → recovery/mobility, positive readiness signal
