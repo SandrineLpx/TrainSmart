@@ -3,13 +3,14 @@
 **MSIS 549B — AI and GenAI for Business Applications**
 University of Washington, Foster School of Business
 
-**GitHub:** [\[link to repo\]](https://github.com/SandrineLpx/Training_App)
-**Demo Video:** [link to video]
+**GitHub:** [\[https://github.com/SandrineLpx/Training_App\]]()
+**Demo Video:** [Github Link](https://github.com/SandrineLpx/Training_App/blob/main/docs/TrainSmart_Demo.mp4)
+or
+[OneDrive Link](https://1drv.ms/v/c/e60b04fc350039b3/IQBZNlMg4L10QaU5-3A9qM1hASBl6b01-DtnKTZfpvnmB-U?e=5mKFIz)
 
 ### Submission Placeholders (Fill Before Final Export)
 
-- [ ] Replace GitHub link with final public/private repo URL
-- [ ] Replace demo video placeholder with final recording URL
+
 - [ ] Verify benchmark totals and appendix links are final
 - [ ] Export this tutorial to PDF and confirm formatting
 
@@ -814,4 +815,4 @@ Full test results across 8 scored scenarios (113 tests).
 
 ## Appendix C: CLAUDE.md (Full Contents)
 
-See the [CLAUDE.md file in the GitHub repository](<repo-url>/blob/main/CLAUDE.md) for the complete 93-line domain rules file.
+See the [CLAUDE.md file in the GitHub repository](https://github.com/SandrineLpx/Training_App/blob/main/CLAUDE.md) for the complete 93-line domain rules file.
