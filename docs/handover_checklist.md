@@ -28,8 +28,10 @@
    - Windows: `.\.venv\Scripts\activate`
 2. Install dependencies
    - `pip install fastmcp openpyxl`
+   - Optional (Windows SSL hardening for Strava): `pip install certifi`
 3. Optional Strava setup (optional)
-   - Copy template: `copy data\strava_config.template.json data\strava_config.json`
+   - Copy template: `copy data\strava_config.template.json data\strava_config.json` (Windows)
+   - macOS/Linux: `cp data/strava_config.template.json data/strava_config.json`
    - Create Strava API app: `https://www.strava.com/settings/api`
    - Run OAuth: `python scripts/strava_auth.py`
 4. If using a new coach spreadsheet, parse it

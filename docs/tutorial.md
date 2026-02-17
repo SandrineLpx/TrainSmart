@@ -3,10 +3,8 @@
 **MSIS 549B — AI and GenAI for Business Applications**
 University of Washington, Foster School of Business
 
-**GitHub:** [\[https://github.com/SandrineLpx/Training_App\]]()
-**Demo Video:** [Github Link](https://github.com/SandrineLpx/Training_App/blob/main/docs/TrainSmart_Demo.mp4)
-or
-[OneDrive Link](https://1drv.ms/v/c/e60b04fc350039b3/IQBZNlMg4L10QaU5-3A9qM1hASBl6b01-DtnKTZfpvnmB-U?e=5mKFIz)
+**GitHub:** [Github Link to TrainSmart Repo](https://github.com/SandrineLpx/TrainSmart/tree/main)
+**Demo Video:** [OneDrive Link](https://1drv.ms/v/c/e60b04fc350039b3/IQBZNlMg4L10QaU5-3A9qM1hASBl6b01-DtnKTZfpvnmB-U?e=5mKFIz)
 
 ### Submission Placeholders (Fill Before Final Export)
 
@@ -91,9 +89,11 @@ The system has three layers:
 └─────────┘   └─────────────┘   └─────────────┘
 ```
 
+> **Figure 1:** Architecture diagram showing the three-layer system. <!-- TODO: Replace ASCII diagram with a proper figure (e.g., draw.io or Mermaid export) if submitting as PDF -->
+
 ### CLAUDE.md — The Domain Brain
 
-`CLAUDE.md` (93 lines) contains all domain knowledge that skills reference but don't duplicate:
+`CLAUDE.md` (~120 lines) contains all domain knowledge that skills reference but don't duplicate:
 
 - **Athlete profile:** 3 days/week, Kirkland WA, Strava-tracked
 - **T/S/H session system:** Technique / Strength / Heavy, each with light/normal/condensed intensities
@@ -162,6 +162,17 @@ Each type can run at three intensities:
 
 Both servers use only Python standard library + `fastmcp`. No heavy dependencies. They launch via `.mcp.json` and are available to all skills automatically.
 
+### Shared Reference File
+
+All three skills reference `references/skill_schemas.md` for JSON schemas, output templates, and examples. This file was extracted in Iteration 7 to avoid duplicating schema definitions across skills. It contains:
+
+- **`current_week_plan.json` schema** — the exact JSON structure written by `/weekly-plan` and read by `/checkin`
+- **`training_log.ndjson` entry schemas** — WL session and cardio log entry formats
+- **Condensed session example** — shows how exercises from skipped days merge into a condensed session
+- **Output templates** — for `/checkin` (confirming, adjusting, no-plan fallback), `/weekly-plan`, and `/log-session`
+
+Skills reference it with lines like `"Format per templates in references/skill_schemas.md"` rather than embedding templates inline.
+
 ### Data Files
 
 | File | Format | Purpose |
@@ -221,13 +232,41 @@ Approximate time by major step (for replication planning):
 | Tutorial + appendices | 3-5 hours | Write-up, benchmark tables, replication guide |
 
 
+### Example Prompts Given to Claude Code
+
+This project involved hundreds of prompts across multiple Claude Code sessions — most were not tracked, since the build was iterative and conversational (fixing a bug, tweaking a threshold, asking "why did it do that?"). The prompts below are reconstructed from iteration logs and git history for the most impactful changes. They are not exact quotes, but realistic in tone and intent.
+
+**Initial build (Iteration 1):**
+> "I'm an olympic weightlifter, I follow a 5-day program from my coach but I only train 3 days a week. I need a checkin skill that tells me what to train today based on how I feel, a weekly planner, and a way to log sessions after. I also have weather and strava data via MCP. Build the skills and CLAUDE.md."
+
+**Mid-iteration 1 — skill split:**
+> "checkin is too slow, it asks too many questions and re-fetches everything every time. split it — do the heavy planning once a week and just confirm before each session."
+
+**T/S/H rename (Iteration 2):**
+> "rename A/B/C to something meaningful. T for technique, S for strength, H for heavy. also add intensity levels — light, normal, and condensed for when I train fewer days but still want to cover everything."
+
+**SSL fix (Iteration 3):**
+> "strava MCP is failing with SSL CERTIFICATE_VERIFY_FAILED. weather works fine. fix it."
+
+**Dedup (Iteration 6):**
+> "the skill files are way too long. they all repeat the strava classification, stop rules, session types etc. CLAUDE.md is always loaded anyway — just reference it instead of copy-pasting."
+
+**Schema extraction (Iteration 7):**
+> "move the JSON schemas and output templates out of the skill files into a shared reference file. skills should just say 'format per skill_schemas.md'."
+
+**NDJSON switch (Iteration 9):**
+> "the training log is a JSON array, which means every write has to read the whole file first. switch to NDJSON so log-session can just append a line."
+
+**Log-session BOM fix (Iteration 13):**
+> "log-session isn't showing up as a skill. checkin and weekly-plan work. what's wrong?"
+
 ### Frustrations and Bottlenecks
 
 1. **Windows SSL certificates:** The Strava MCP server failed with `SSL: CERTIFICATE_VERIFY_FAILED` on Windows because Python's venv doesn't access the Windows certificate store. Fix: use `certifi` CA bundle. The bug was that `SSL_CONTEXT` was passed to token refresh but not to activity fetch — a one-line inconsistency that took time to diagnose.
 
 2. **MCP server launch on Windows:** Claude Code initially couldn't launch Python MCP servers directly. We had to wrap them in `cmd /c`, which added latency and complexity. Later (Iteration 10) we found that direct launch works and removed the wrapper.
 
-3. **Prompt bloat:** After the initial build, each skill file was 120-210 lines because it repeated domain rules from CLAUDE.md (session types, Strava classification, stop rules, etc.). Two iterations of deduplication reduced total prompt size by 69% (517 → 162 lines) without losing any behavior.
+3. **Prompt bloat:** After the initial build, each skill file was 120-210 lines because it repeated domain rules from CLAUDE.md (session types, Strava classification, stop rules, etc.). Two iterations of deduplication reduced total prompt size by ~69% (517 → ~162 lines). Subsequent feature additions grew them back to 259 lines — still a 50% net reduction.
 
 4. **Training log format:** The initial JSON array format (`{"entries":[...]}`) required reading the entire file on every write. With 3 sessions/week, this becomes O(n) per append. Switching to NDJSON (one JSON object per line) made writes O(1) — a simple `echo >> file` append.
 
@@ -288,22 +327,22 @@ Stop rules:
 
 **After (skills reference CLAUDE.md):**
 ```markdown
-# In checkin/SKILL.md — 65 lines
+# In checkin/SKILL.md
 Classify per CLAUDE.md "Strava Activity Types".
 ...
 Stop rules: [2 stop rules from CLAUDE.md]
 ```
 
-**Why:** Since CLAUDE.md is always loaded as context alongside any skill, duplicating its content inflates prompt tokens without adding information. After deduplication:
+**Why:** Since CLAUDE.md is always loaded as context alongside any skill, duplicating its content inflates prompt tokens without adding information. The initial dedup (Iterations 6-7) cut total skill lines from 517 to ~162. Subsequent iterations (8-12) added new features (caching logic, Strava skip rules, competition taper, PR weight guidance), growing the files to their current sizes:
 
-| Skill | Before | After | Reduction |
-|-------|--------|-------|-----------|
-| checkin | 185 lines | 65 lines | -65% |
-| weekly-plan | 212 lines | 58 lines | -73% |
-| log-session | 120 lines | 39 lines | -68% |
-| **Total** | **517 lines** | **162 lines** | **-69%** |
+| Skill | Before (v1) | After dedup (v7) | Current (v12) | Net reduction |
+|-------|-------------|-------------------|----------------|---------------|
+| checkin | 185 lines | ~65 lines | 97 lines | -48% |
+| weekly-plan | 212 lines | ~58 lines | 94 lines | -56% |
+| log-session | 120 lines | ~39 lines | 68 lines | -43% |
+| **Total** | **517 lines** | **~162 lines** | **259 lines** | **-50%** |
 
-**Result:** Faster response time (fewer input tokens), single source of truth (one edit propagates everywhere), and skills became pure workflow logic — no domain knowledge duplication.
+**Result:** Even after feature growth, skills are still half their original size. The dedup created headroom — new features could be added without returning to bloated prompts. Single source of truth (one edit propagates everywhere), and skills remain pure workflow logic.
 
 ### Prompt Quality Critique
 
@@ -355,6 +394,8 @@ The system was tested with real training data across 2 weeks of the Leg Drive pr
 > - Short on time? Drop: Lu Raises. Keep snatch complex + snatch DL.
 > - Extra time? Add: Snatch balance 3x1, Ab Wheel 3x10
 
+<!-- TODO: Add screenshot of actual /checkin output in Claude Code terminal (Figure 2) -->
+
 **What worked:** Confirmed the session in 10 seconds. Exercises are exact (from program.json), stop rules are always present, time-flex gives options without overloading.
 
 **What changed after this run:** Nothing — the happy path worked as designed.
@@ -389,6 +430,8 @@ Phase 3 — 4th session added:
 > Updated layout: **Tue T (done) → Wed S → Thu T2 → Fri H**
 >
 > Thursday now picks up Wed program day: Hang power clean + 2 jerks 6x(1+1+1), Jerk Recovery 6x(1+1), Cossack squats 3x10.
+
+> See the [demo video](https://1drv.ms/v/c/e60b04fc350039b3/IQBZNlMg4L10QaU5-3A9qM1hASBl6b01-DtnKTZfpvnmB-U?e=5mKFIz) for a live walkthrough of this scenario (rest day override with 4th session addition), including the `/weekly-plan` happy path that precedes it.
 
 **What worked:** The system adapted gracefully to an unplanned change. It pulled the next logical session (S from Thursday), provided a spacing rationale, and when the athlete wanted a 4th session, it sourced exercises from an uncovered program day and placed them correctly. The weekly plan was updated to reflect all changes.
 
@@ -557,7 +600,7 @@ Training decision-making is a genuine daily pain point. I spend 5-10 minutes bef
 
 3. **MCP tools for real-time data.** Weather and Strava provide signals that static prompts can't access. The interference detection (hard ski → avoid heavy S/H next day) caught a real scenario in testing.
 
-4. **Prompt deduplication.** Reducing skills by 69% (517 → 162 lines) while preserving behavior was the highest-leverage improvement. Faster responses, single source of truth, easier iteration.
+4. **Prompt deduplication.** Reducing skills by 50% net (517 → 259 lines, with a low of ~162 before feature additions) while preserving behavior was the highest-leverage improvement. Faster responses, single source of truth, easier iteration.
 
 ### What Did Not Work Well
 
@@ -602,11 +645,13 @@ To rebuild this system from scratch:
 ### Step 1: Clone and set up
 ```bash
 git clone <repo-url>
-cd Training_App
+cd <repo-folder>                # e.g., TrainSmart
 python -m venv .venv
 .venv\Scripts\activate          # Windows
 # source .venv/bin/activate     # macOS/Linux
 pip install fastmcp openpyxl
+# Optional (Windows SSL hardening for Strava):
+# pip install certifi
 ```
 
 ### Step 2: Parse your program
@@ -614,11 +659,16 @@ If starting from a new Excel spreadsheet:
 ```bash
 python scripts/parse_excel.py "references/Leg Drive.xlsx" 2026-02-02
 ```
+Windows shortcut (optional local helper):
+```powershell
+.\scripts\parse_program.ps1 -File "references\Leg Drive.xlsx" -StartDate 2026-02-02
+```
 This generates `data/program.json` and `data/program_summary.md`.
 
 ### Step 3: Configure Strava (optional)
 ```bash
-cp data/strava_config.template.json data/strava_config.json
+copy data\strava_config.template.json data\strava_config.json   # Windows
+# cp data/strava_config.template.json data/strava_config.json    # macOS/Linux
 # Edit strava_config.json with your Client ID and Client Secret
 # (Get these from https://www.strava.com/settings/api)
 python scripts/strava_auth.py
@@ -642,115 +692,297 @@ Open the project folder in Claude Code (or VS Code with the Claude Code extensio
 
 ---
 
-## Appendix A: Skill File Contents
+## Appendix A: Skill File Contents (Exact)
 
-This appendix summarizes the skill instructions. Exact current skill files are:
-- `.claude/skills/checkin/SKILL.md`
-- `.claude/skills/weekly-plan/SKILL.md`
-- `.claude/skills/log-session/SKILL.md`
+The full contents of each skill file are reproduced below. These are the actual prompts loaded by Claude Code when a skill is invoked.
 
-### `/checkin` (checkin/SKILL.md)
+### `/checkin` — `.claude/skills/checkin/SKILL.md` (97 lines)
 
 ```markdown
+---
 name: checkin
-purpose: quick pre-workout confirmation/adjustment
+description: Quick pre-workout check-in. Reads your weekly plan, checks how you feel,
+  and confirms or adjusts today's session. Use right before training — takes 10 seconds.
+---
 
-Inputs:
-- Sleep, soreness, energy
-- Weekly plan + supporting log/PR/Strava/weather context
+# Pre-Workout Check-in
 
-Outputs:
-- Session type/intensity recommendation
-- Adjustments + stop rules + time-flex lines
-- Plan update when recommendation differs from schedule
+Fast confirmation before training. Reads the weekly plan, asks how you feel, confirms or adjusts.
 
-Workflow:
-0. Show context from current_week_plan.json
-1. Ask 3 readiness questions
-2. Gather plan/log/PR/Strava/weather context
-3. Apply decision rules (including skipped-session handling)
-4. Output per template
-5. Update current_week_plan.json if session changed
+## Inputs
 
-Constraints:
+- Athlete readiness inputs: sleep, leg soreness, energy
+- Optional extra context volunteered by athlete
+- Current weekly plan (`data/current_week_plan.json`)
+- Supporting context: training log, PRs, Strava (if available), weather (if cardio is suggested)
+
+## Outputs
+
+- Today's recommended session type/intensity (confirm or adjust)
+- Exercise-level adjustments with stop rules and time-flex options
+- Plan update in `data/current_week_plan.json` when schedule/session changes
+
+## Workflow
+
+### Step 0: Show context
+
+Read `data/current_week_plan.json` (contains `program_name`, `total_weeks`, `week_number`). Display one line:
+**Program:** [program_name] | **Week [week_number] of [total_weeks]** | **[Today's day], [date]**
+Do NOT read `program.json` here — the plan already has everything needed.
+
+### Step 1: Ask (3 questions only)
+
+Pre-workout check:
+1. Sleep last night: good / ok / bad
+2. Leg soreness (0-10):
+3. Energy (1-5):
+If the athlete volunteers extra info, use it. Don't ask for more.
+
+### Step 2: Gather data (in parallel)
+
+1. **Weekly plan** → already loaded in Step 0. Find today's session. If no plan exists → offer:
+   (1) run `/weekly-plan` or (2) quick fallback (read `program.json` + apply decision rules).
+2. **Training log** → Read `data/training_log.ndjson`. Check completed vs. missed sessions this
+   week + recent cardio (48h).
+3. **PRs** → Read `data/prs.json`. Used in Step 4 to show target weights per CLAUDE.md
+   "Weight Guidance".
+4. **Strava** (days_back=2) → Classify per CLAUDE.md "Strava Activity Types". If unavailable or
+   returns `"status": "not_configured"`, skip silently and rely on training log for recent activity
+   data. **Skip if the weekly plan was created today** (`created_date` == today) — Strava data was
+   already fetched by `/weekly-plan` and recent activity is reflected in the plan's notes.
+5. **Weather** (days=1) → Only if today has a cardio suggestion in the plan. **Skip if the weekly
+   plan was created today** — weather was already checked by `/weekly-plan`.
+
+### Step 3: Decide
+
+Apply CLAUDE.md "Session Selection Decision Rules". If readiness is BAD (soreness >= 6 OR bad
+sleep + energy <= 2): S→mini-S/T, H→mini-T/recovery, Condensed→drop extras. T is always OK.
+
+**Missed sessions:** If a planned session has no matching log entry and no Strava activity for
+that date, flag it. Ask if it was skipped or just unlogged. If skipped: mark it `"skipped"` in
+the plan, carry over 1-2 key exercises (cut accessories), and ask: "Want to keep [N] sessions
+this week or adjust to [N-1]?"
+**Hard cardio in last 24-36h:** apply protection rule from plan, or switch to T/mini.
+**Not a planned day:** Ask the athlete what they want to do:
+1. **Pull forward next session** — carry over the next planned session to today.
+2. **Just log training** — skip session planning, keep the weekly plan as-is.
+3. **Add a hybrid (T2) session** — add an extra session for the week. Build a T2 per CLAUDE.md
+   rules. If readiness is bad, suggest option 1 or 2 instead.
+
+### Step 3b: Time-flex suggestions
+
+**Short on time?** Drop: accessories → carry-overs → lower-priority strength. Never drop main lift(s).
+**Extra time?** Add: carry-overs → skipped-day accessories → back-off sets.
+Keep each list to 2-3 items with exercise names.
+
+### Step 4: Output
+
+Format per templates in `references/skill_schemas.md` (confirming / adjusting / no-plan). Always
+include 2 stop rules from CLAUDE.md + time-flex lines. Show target weights per CLAUDE.md "Weight
+Guidance" for exercises with a matching PR.
+
+### Step 5: Update plan if changed
+
+If today was **not in the schedule** or the recommended session **differs from the plan**: read
+`data/current_week_plan.json`, update the `schedule` array, and write it back. If a session was
+pulled forward, mark that day's status as `"moved"`. Skip this step if the session matches exactly.
+
+## Failure Modes and Fallbacks
+
+- Missing weekly plan file: offer `(1) /weekly-plan` or `(2) quick fallback for today`
+- Strava unavailable/not configured: continue using training log only
+- Weather unavailable: skip weather-based cardio gating and continue
+- Tool/read errors on optional data: continue with available inputs; do not block the check-in
+
+## Constraints
+
 - Max 3 questions
-- Never recommend S/H when soreness >= 6
-- Always include 2 stop rules
-
-Failure modes/fallbacks:
-- Missing plan: offer /weekly-plan or quick fallback
-- Strava/weather unavailable: continue with available data
+- Never recommend S or H when soreness >= 6
+- Always include 2 stop rules (CLAUDE.md)
+- Use the weekly plan — don't recalculate from scratch
+- If tools fail, continue without them
 ```
 
-### `/weekly-plan` (weekly-plan/SKILL.md)
+### `/weekly-plan` — `.claude/skills/weekly-plan/SKILL.md` (94 lines)
 
 ```markdown
+---
 name: weekly-plan
-purpose: build and save weekly schedule
+description: Plan your training week. Sets how many days you'll train, picks the best days based
+  on weather and schedule, and saves a tentative plan. Use at the start of each week (Sunday/Monday).
+---
 
-Inputs:
-- Training days, cardio preference, fatigue/pain
-- Program/log/PR context + weather/Strava when available
-- Competition date from preferences
+# Weekly Planner
 
-Outputs:
-- Day-by-day weekly schedule
-- Saved current_week_plan.json (with program_name + total_weeks)
+Review last week, ask schedule preferences, build day-by-day schedule (WL + cardio), save to
+`data/current_week_plan.json`.
 
-Workflow:
-0. Check/confirm competition date
-1. Ask training days + cardio + fatigue
-2. Gather log/program/PR/weather/Strava
-   - Advisory log-completeness check:
-     - Strava available: cross-check Strava vs log and ask whether to log missing sessions
-     - Strava unavailable: ask athlete to confirm logged days
-     - Continue either way (no hard block)
-3. Build schedule using T/S/H rules + intensity/spacing
-4. Save current_week_plan.json
-5. Output per template
+## Inputs
 
-Constraints:
+- Athlete inputs: available training days, outdoor cardio preference, fatigue/pain
+- Competition date confirmation/update from `data/preferences.json`
+- Program/training context: `data/program.json`, `data/training_log.ndjson`, `data/prs.json`
+- External context: weather forecast and Strava recent activities (if available)
+
+## Outputs
+
+- Weekly schedule response (day-by-day WL/cardio plan + rationale)
+- Saved/updated `data/current_week_plan.json` including `program_name` and `total_weeks`
+
+## Workflow
+
+### Step 0: Check for competition date
+
+Before asking anything, read `data/preferences.json` and check for a `competition_date` field.
+- **If a competition date exists:** Show it to the athlete and ask to confirm it's still correct.
+  Also ask if there are any other competitions or events before that date.
+- **If no competition date exists:** Ask if there's a competition within the next 4 weeks. If yes,
+  save the date to `data/preferences.json` as `competition_date` (ISO format).
+
+### Step 1: Ask the athlete (all at once)
+
+Quick weekly planning:
+1. Which days are you training this week? (e.g., "Tue, Thu, Sat" or "none")
+2. Want to plan outdoor cardio? (yes/no — I'll check weather)
+3. How are you feeling? Fatigue: low/medium/high, any pain?
+Note: Competition question is handled in Step 0 — do NOT ask again here.
+
+### Step 2: Gather data (in parallel)
+
+1. **Last week's log** → Read `data/training_log.ndjson`. Summarize: sessions done, exercises
+   completed vs. skipped, cardio, RPE avg, soreness trend.
+2. **Program** → Read `data/program.json`. Calculate week number per CLAUDE.md formula. Look up
+   prescribed exercises for all 5 days.
+3. **PRs** → Read `data/prs.json`. Used in Step 3 to compute target weights per CLAUDE.md
+   "Weight Guidance".
+4. **Weather** (days=7) → Identify outdoor-suitable days per CLAUDE.md "Weather Preferences".
+5. **Strava** (days_back=7) → Classify per CLAUDE.md "Strava Activity Types".
+
+After loading data, do a quick log-completeness check (no hard block):
+- **If Strava is available:** Cross-check last week's Strava activities against
+  `training_log.ndjson`. If likely training sessions are missing from the log, ask whether to log
+  missing sessions.
+- **If Strava is unavailable/not configured:** Ask: "Are last week's training days accurately
+  logged, or do you want to add anything before I plan this week?"
+- In both cases, athlete chooses whether to add info now or continue planning. Never block.
+
+### Step 3: Build the schedule
+
+Assign T/S/H/Hybrid per CLAUDE.md "T/S/H Session System". Priority when fewer than 5 days:
+T → S → H. (0=rest, 1=T, 2=T+S, 3=T+S+H, 4=+Hybrid, 5=full week). If no heavy work in 7+ days,
+prioritize H over S.
+**Intensity:** default normal. Use condensed to pull 1-2 priority exercises from skipped days.
+Use light/mini when fatigued. See condensed example in `references/skill_schemas.md`.
+**Weights:** For each exercise with a matching PR in `prs.json`, compute target weight range per
+CLAUDE.md "Weight Guidance" and show it inline.
+**Spacing:** >= 1 rest day between sessions when possible. Note carry-overs from last week.
+**Cardio:** place on weather-suitable non-WL days. Hard run/ski never before H or heavy S.
+**Competition taper:** D-10→D-5: reduce volume 20-40%. D-4→D-2: light technique. D-1: mini-T/mobility.
+**Fatigue:** High/pain >5 → all mini. Medium → standard. Low → full.
+
+### Step 4: Save the plan
+
+Read then overwrite `data/current_week_plan.json`. Include `program_name` and `total_weeks` from
+program.json so `/checkin` can skip reading the program file. Schema in `references/skill_schemas.md`.
+
+### Step 5: Output
+
+Format per template in `references/skill_schemas.md`. Display temperatures as C (F) per CLAUDE.md.
+
+## Failure Modes and Fallbacks
+
+- Weather unavailable: plan with log/program data only and skip weather ranking
+- Strava unavailable/not configured: ask about recent cardio or rely on training log
+- Missing/limited recent logs: continue planning from program + athlete inputs
+- Conflicting availability constraints: prioritize requested WL day count
+
+## Constraints
+
 - Never schedule more WL days than requested
-- Save plan every run
-- Log-completeness check is advisory only
-
-Failure modes/fallbacks:
-- Weather/Strava unavailable: continue with available context
-- Limited logs: continue from program + athlete inputs
+- Always save to `data/current_week_plan.json` with `program_name` + `total_weeks`
+- Maximum 1 protection rule
+- Schedule is a suggestion — athlete can move sessions
+- If weather/Strava unavailable, skip or use log data only
+- Log-completeness checks are advisory only (user choice, no hard-block)
 ```
 
-### `/log-session` (log-session/SKILL.md)
+### `/log-session` — `.claude/skills/log-session/SKILL.md` (68 lines)
 
 ```markdown
+---
 name: log-session
-purpose: record completed session and update PRs
+description: Log a completed training session. Records what you did, compares to the program
+  prescription, and updates your training log. Use after training.
+---
 
-Inputs:
-- Log date, session type, performed exercises
-- RPE, sleep, soreness, optional notes
-- Program + PR reference files
+# Session Logger
 
-Outputs:
-- Appended NDJSON entry in training_log.ndjson
-- PR updates in prs.json when applicable
-- Confirmation output
+Record a completed session to `data/training_log.ndjson`. Compare against prescription. Check
+for new PRs.
 
-Workflow:
-0. Detect/confirm log date
-1. Ask logging inputs
-2. Load program and compare performed vs prescribed
-3. Build + append NDJSON entry
-4. Check/update PRs
-5. Output per template
+## Inputs
 
-Constraints:
-- Append-only NDJSON log
-- Valid single-line JSON per entry
+- Log date (`today` or explicit `YYYY-MM-DD`)
+- Session type/intensity and exercises performed (or `as prescribed`)
+- Readiness and context fields: RPE, sleep, soreness, optional notes
+- Program + PR reference files: `data/program.json`, `data/prs.json`
 
-Failure modes/fallbacks:
-- /checkin missed: still log
-- Unmatched exercises: log as extras
-- PR file issues: still save log, skip PR update
+## Outputs
+
+- One appended NDJSON log entry in `data/training_log.ndjson`
+- Updated PR values in `data/prs.json` when a new PR is detected
+- Logging confirmation output (including PR callouts if applicable)
+
+## Workflow
+
+### Step 0: Detect date and confirm log date
+
+Read system date/time and show `Today: YYYY-MM-DD`.
+- Default `log_date` = today
+- If athlete says they are backfilling, use their provided date as `log_date`
+- If `/checkin` was missed, continue and log normally
+
+### Step 1: Ask the athlete (all at once)
+
+1. **Log date:** `today` or `YYYY-MM-DD` (if blank/`today`, use detected date)
+2. **Session type:** T / S / H / T2 / mini-T / mini-S / mini-H / cardio / recovery (+ intensity)
+3. **Exercises performed:** what you did, or "as prescribed". Cardio: activity + duration + intensity.
+4. **RPE (1-10)** | 5. **Sleep:** good/ok/bad | 6. **Leg soreness (0-10)** | 7. **Notes (optional)**
+
+### Step 2: Load program + compare
+
+Read `data/program.json`. Calculate week number from `log_date` per CLAUDE.md formula (not always
+from today). Match performed exercises against prescription. "as prescribed" -> all completed.
+Unmatched extras -> bonus entries. Cardio -> no comparison.
+
+### Step 3: Build + save
+
+Build entry as a single-line JSON object per schema in `references/skill_schemas.md`. Append it
+to `data/training_log.ndjson` using Bash: `echo '<json>' >> data/training_log.ndjson`.
+**Append only - never read+rewrite the file.**
+
+### Step 4: Check PRs
+
+Read `data/prs.json`. Compare logged weights against PR-tracked exercises (CLAUDE.md "Personal
+Records"). If exceeded -> update `prs.json`.
+
+### Step 5: Output
+
+Format per template in `references/skill_schemas.md`. Include new PRs if any.
+
+## Failure Modes and Fallbacks
+
+- `/checkin` not run earlier: continue and log normally
+- Unknown/unmatched exercise names: log as performed; mark unmatched as extras
+- Missing sets/reps in user input: use prescribed count when available
+- PR file missing/unreadable: still append session log; skip PR update and note it
+
+## Constraints
+
+- Append only - never read+rewrite the log file
+- If sets not specified, use prescribed count
+- Each entry must be valid JSON on a single line (NDJSON format)
+- If `/checkin` was missed, still log the session without warning/blocking
 ```
 
 ## Appendix B: Benchmark Test Case Table
@@ -815,4 +1047,4 @@ Full test results across 8 scored scenarios (113 tests).
 
 ## Appendix C: CLAUDE.md (Full Contents)
 
-See the [CLAUDE.md file in the GitHub repository](https://github.com/SandrineLpx/Training_App/blob/main/CLAUDE.md) for the complete 93-line domain rules file.
+See the [CLAUDE.md file in the GitHub repository](https://github.com/SandrineLpx/TrainSmart/blob/main/CLAUDE.md) for the complete ~120-line domain rules file.
