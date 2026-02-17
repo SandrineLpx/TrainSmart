@@ -20,3 +20,4 @@ Thumbs.db
 data/training_log.ndjson
 *.log
 logs/
+docs/course/
