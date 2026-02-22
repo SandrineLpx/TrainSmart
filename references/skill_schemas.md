@@ -159,3 +159,19 @@ Display temperatures as °C (°F) per CLAUDE.md.
 **PRs:** [new PRs, e.g., "Snatch 59kg (was 57kg)" — omit if none]
 **Stats:** RPE: [N] | Sleep: [quality] | Soreness: [N]/10
 ```
+
+### /onboard
+```
+**Local setup status**
+- preferences.json: [available | missing]
+- prs.json: [created | existing | reset]
+- strava_config.json: [created | existing | reset | skipped]
+
+**Personalization**
+- Preferences updated: [yes/no]
+- PRs updated: [yes/no]
+
+**Next**
+1. Review `data/preferences.json` and `data/prs.json`
+2. Run `/weekly-plan`
+```

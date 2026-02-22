@@ -4,10 +4,11 @@ An agentic AI training assistant built with **Claude Code Skills** and **MCP ser
 
 ## How It Works
 
-Train Smart wraps an 8-week periodized weightlifting program with three conversational skills:
+Train Smart wraps an 8-week periodized weightlifting program with four conversational skills:
 
 | Skill | When | What it does |
 |-------|------|--------------|
+| `/onboard` | First-time setup | Creates local PR/Strava files from templates and helps set key preferences/PRs |
 | `/weekly-plan` | Start of week | Reviews last week, cross-checks logs (with Strava when available), asks which days you can train, and builds a schedule respecting weather and recovery |
 | `/checkin` | Before each session | Reads the plan, asks sleep/soreness/energy, confirms or adjusts today's session type and intensity |
 | `/log-session` | After each session | Records what you did, compares to prescription, detects PRs, updates the training log |
@@ -20,7 +21,7 @@ Before planning, `/weekly-plan` performs an advisory log-completeness check: it 
 
 ```
 CLAUDE.md                 # Domain rules, decision logic, stop rules
-.claude/skills/           # Three skill definitions (checkin, log-session, weekly-plan)
+.claude/skills/           # Four skill definitions (onboard, checkin, log-session, weekly-plan)
 mcp_servers/
   weather_mcp.py          # Open-Meteo forecast for Kirkland, WA (no API key)
   strava_mcp.py           # Strava API v3 — recent activities + OAuth2 refresh
@@ -31,6 +32,7 @@ data/
   prs.json                # Personal records tracker
   preferences.json        # Weather thresholds, display settings
 scripts/
+  init_local_state.py     # Initializes PR/Strava local files from templates
   parse_excel.py          # Converts coach's Excel spreadsheet to program.json
   strava_auth.py          # One-time OAuth2 setup for Strava
 tests/                    # Benchmark scenarios and summary
@@ -59,7 +61,21 @@ iterations/               # Development iteration logs + index
    pip install fastmcp openpyxl
    ```
 
-3. **Configure Strava (optional)**
+3. **Optional: reset PR data from template**
+   ```bash
+   # Recommended (cross-platform)
+   python scripts/init_local_state.py
+   ```
+   Manual fallback:
+   ```bash
+   # Windows
+   copy data\prs.template.json data\prs.json
+
+   # macOS/Linux
+   cp data/prs.template.json data/prs.json
+   ```
+
+4. **Configure Strava (optional)**
    ```bash
    # Copy the template and fill in your Strava API credentials
    cp data/strava_config.template.json data/strava_config.json
@@ -67,7 +83,10 @@ iterations/               # Development iteration logs + index
    python scripts/strava_auth.py
    ```
 
-4. **Parse the program (if starting from a new Excel file)**
+**Reproducibility note:** `data/preferences.json` and `data/prs.json` are kept in the repo for demo consistency and reproducibility.
+**Security note:** Config files containing credentials are provided as templates. Copy them locally and fill with your own values. Do not commit secrets.
+
+5. **Parse the program (if starting from a new Excel file)**
    ```bash
    python scripts/parse_excel.py "references/Leg Drive.xlsx" 2026-02-02
    ```
@@ -76,13 +95,14 @@ iterations/               # Development iteration logs + index
    .\scripts\parse_program.ps1 -File "references\Leg Drive.xlsx" -StartDate 2026-02-02
    ```
 
-5. **Start Claude Code** — the `.mcp.json` file auto-registers both MCP servers.
+6. **Start Claude Code** — the `.mcp.json` file auto-registers both MCP servers.
 
 ## Usage
 
 Open Claude Code in the project directory and use the skills:
 
 ```
+/onboard             # First-time local setup for personal files
 /weekly-plan          # Plan your training week
 /checkin              # Pre-session check-in
 /log-session          # Log what you did after training
@@ -116,6 +136,7 @@ If `data/current_week_plan.json` is missing, `/checkin` does not auto-run `/week
 Training_App/
   CLAUDE.md                          # Single source of truth for domain rules
   .claude/skills/
+    onboard/SKILL.md                 # New-user local setup skill
     checkin/SKILL.md                 # Pre-session check-in skill
     log-session/SKILL.md             # Post-session logging skill
     weekly-plan/SKILL.md             # Weekly planning skill
@@ -127,10 +148,12 @@ Training_App/
     program.json                     # Periodized program
     current_week_plan.json           # Active week schedule
     training_log.ndjson              # Session log (append-only)
-    prs.json                         # Personal records
-    preferences.json                 # User preferences
+    prs.json                         # Shared demo PR data (tracked for reproducibility)
+    prs.template.json                # Optional PR template
+    preferences.json                 # Shared demo preferences (tracked for reproducibility)
     strava_config.template.json      # Strava credentials template
   scripts/
+    init_local_state.py              # Local state initializer
     parse_excel.py                   # Excel-to-JSON program parser
     strava_auth.py                   # Strava OAuth2 setup
   tests/
