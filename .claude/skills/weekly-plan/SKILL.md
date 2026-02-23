@@ -54,7 +54,7 @@ After loading data, do a quick log-completeness check (no hard block):
 
 ### Step 3: Build the schedule
 
-Assign T/S/H/Hybrid per CLAUDE.md "T/S/H Session System". Priority when fewer than 5 days: T → S → H. (0=rest, 1=T, 2=T+S, 3=T+S+H, 4=+Hybrid, 5=full week). If no heavy work in 7+ days, prioritize H over S.
+Assign T/S/H/Hybrid per CLAUDE.md "T/S/H Session System". Priority when fewer than 5 days: T → S → H. (0=rest, 1=T, 2=T+S, 3=T+S+H, 4=+Hybrid, 5=full week). If the heavy-work recency trigger in CLAUDE.md is met, prioritize H over S.
 
 **Intensity:** default normal. Use condensed to pull 1-2 priority exercises from skipped days (cut accessories, max ~6 per session). Use light/mini when fatigued. See condensed example in `references/skill_schemas.md`.
 
@@ -66,7 +66,7 @@ Assign T/S/H/Hybrid per CLAUDE.md "T/S/H Session System". Priority when fewer th
 
 **Competition taper:** D-10→D-5: reduce volume 20-40%. D-4→D-2: light technique. D-1: mini-T/mobility.
 
-**Fatigue:** High/pain >5 → all mini. Medium → standard. Low → full.
+**Fatigue:** Apply CLAUDE.md readiness rules to select mini/standard/full intensity.
 
 ### Step 4: Save the plan
 

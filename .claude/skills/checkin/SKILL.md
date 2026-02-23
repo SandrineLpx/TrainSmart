@@ -53,7 +53,7 @@ If the athlete volunteers extra info, use it. Don't ask for more.
 
 ### Step 3: Decide
 
-Apply CLAUDE.md "Session Selection Decision Rules". If readiness is BAD (soreness ≥ 6 OR bad sleep + energy ≤ 2): S→mini-S/T, H→mini-T/recovery, Condensed→drop extras. T is always OK.
+Apply CLAUDE.md "Session Selection Decision Rules". If readiness falls into the no-S/H condition defined there, downgrade as follows: S→mini-S/T, H→mini-T/recovery, Condensed→drop extras. T is always OK.
 
 **Missed sessions:** If a planned session has no matching log entry and no Strava activity for that date, flag it. Ask if it was skipped or just unlogged. If skipped: mark it `"skipped"` in the plan, carry over 1-2 key exercises (cut accessories), and ask: "Want to keep [N] sessions this week or adjust to [N-1]?"
 **Hard cardio in last 24-36h:** apply protection rule from plan, or switch to T/mini.
@@ -91,7 +91,7 @@ If today was **not in the schedule** or the recommended session **differs from t
 ## Constraints
 
 - Max 3 questions
-- Never recommend S or H when soreness ≥ 6
+- Never recommend S or H when CLAUDE.md readiness rules disallow it
 - Always include 2 stop rules (CLAUDE.md)
 - Use the weekly plan — don't recalculate from scratch
 - If tools fail, continue without them

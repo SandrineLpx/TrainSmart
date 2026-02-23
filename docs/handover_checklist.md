@@ -1,8 +1,15 @@
 # Handover Checklist (Quick Setup)
 
+## Scope
+
+- `README.md`: full project setup, architecture, and reproducibility instructions
+- `.claude/skills/onboard/SKILL.md`: interactive local setup/reset flow inside Claude Code
+- `docs/handover_checklist.md` (this file): quick handoff verification checklist for maintainers/instructors
+
 ## What Is Included
 
 ### Skills (`.claude/skills/*/SKILL.md`)
+- `/onboard`: optional local PR/Strava setup/reset
 - `/weekly-plan`: weekly schedule builder (WL + optional cardio)
 - `/checkin`: pre-session readiness check and session adjustment
 - `/log-session`: post-session logging + PR update handling
@@ -27,16 +34,19 @@
    - `python -m venv .venv`
    - Windows: `.\.venv\Scripts\activate`
 2. Install dependencies
-   - `pip install fastmcp openpyxl`
-   - Optional (Windows SSL hardening for Strava): `pip install certifi`
-3. Optional Strava setup (optional)
+   - `pip install -r requirements.txt`
+3. Optional local PR/Strava setup/reset
+   - `python scripts/init_local_state.py`
+   - Optional Strava template too: `python scripts/init_local_state.py --with-strava`
+4. Optional Strava setup (optional)
    - Copy template: `copy data\strava_config.template.json data\strava_config.json` (Windows)
    - macOS/Linux: `cp data/strava_config.template.json data/strava_config.json`
    - Create Strava API app: `https://www.strava.com/settings/api`
    - Run OAuth: `python scripts/strava_auth.py`
-4. If using a new coach spreadsheet, parse it
+5. If using a new coach spreadsheet, parse it
    - `python scripts/parse_excel.py "references/Leg Drive.xlsx" 2026-02-02`
-5. Open Claude Code in project root and run:
+6. Open Claude Code in project root and run:
+   - `/onboard` (optional)
    - `/weekly-plan`
    - `/checkin`
    - `/log-session`

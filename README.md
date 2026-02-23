@@ -35,6 +35,7 @@ scripts/
   init_local_state.py     # Initializes PR/Strava local files from templates
   parse_excel.py          # Converts coach's Excel spreadsheet to program.json
   strava_auth.py          # One-time OAuth2 setup for Strava
+requirements.txt          # Pinned Python dependencies for reproducible setup
 tests/                    # Benchmark scenarios and summary
 iterations/               # Development iteration logs + index
 ```
@@ -58,7 +59,7 @@ iterations/               # Development iteration logs + index
    python -m venv .venv
    .venv\Scripts\activate        # Windows
    # source .venv/bin/activate   # macOS/Linux
-   pip install fastmcp openpyxl
+   pip install -r requirements.txt
    ```
 
 3. **Optional: reset PR data from template**
@@ -102,7 +103,7 @@ iterations/               # Development iteration logs + index
 Open Claude Code in the project directory and use the skills:
 
 ```
-/onboard             # First-time local setup for personal files
+/onboard             # Optional PR/Strava local setup or reset
 /weekly-plan          # Plan your training week
 /checkin              # Pre-session check-in
 /log-session          # Log what you did after training
@@ -111,6 +112,20 @@ Open Claude Code in the project directory and use the skills:
 The system reads `CLAUDE.md` for all domain rules (session selection, stop rules, intensity adjustments) so the AI follows the same logic every time.
 
 If `data/current_week_plan.json` is missing, `/checkin` does not auto-run `/weekly-plan`; it offers two options: run `/weekly-plan` now or use a one-off quick fallback for today.
+
+## Reproducibility Check
+
+Run these commands from a fresh clone after setup:
+
+```bash
+python -m py_compile scripts/init_local_state.py scripts/parse_excel.py mcp_servers/weather_mcp.py mcp_servers/strava_mcp.py
+python scripts/init_local_state.py
+```
+
+Expected outcomes:
+- compile command exits successfully
+- initializer reports `prs.json: existing` or `prs.json: created`
+- tracked demo state files are present: `data/preferences.json`, `data/prs.json`, `data/program.json`
 
 ## MCP Servers
 
@@ -156,6 +171,7 @@ Training_App/
     init_local_state.py              # Local state initializer
     parse_excel.py                   # Excel-to-JSON program parser
     strava_auth.py                   # Strava OAuth2 setup
+  requirements.txt                   # Pinned Python dependencies
   tests/
     benchmark_summary.md             # Aggregate results
     scenario_*.md                    # Individual test scenarios
@@ -178,7 +194,7 @@ If you are new to this repo, read in this order:
 
 1. `README.md` (this file) for setup and architecture
 2. `CLAUDE.md` for training rules and decision logic
-3. `docs/README.md` for document navigation
+3. `docs/README.md` for document navigation, including `tutorial.md` (full context) and `handover_checklist.md` (practical setup/next-step checklist)
 4. `iterations/README.md` for change history navigation
 
 `data/` should hold active runtime state, while `references/` holds source templates/examples.

@@ -7,4 +7,4 @@ Quick guide to project documentation files.
 - `benchmark_appendix.md` — benchmark appendix material for reporting.
 - `TrainSmart_Demo.mp4` — demo video end-to-end of the current system in action.
 
-Tip: start with `tutorial.md` for context, then use `handover_checklist.md` as an execution checklist.
+Tip: start with `tutorial.md` for context, use `README.md` for full setup, and use `handover_checklist.md` for a quick handoff validation pass.
